@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://biyljgujvggl4"]
+
+[ext_resource type="Shader" uid="uid://duwy53sah5ksn" path="res://efecto_objeto.gdshader" id="1_pjwgy"]
+[ext_resource type="Script" uid="uid://di32qvt5dhd3g" path="res://control_efectos.gd" id="2_7ursy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qa2gp"]
+render_priority = 0
+shader = ExtResource("1_pjwgy")
+shader_parameter/color_base = Color(0.90588236, 0.29803923, 0.23529412, 1)
+shader_parameter/color_flash = Color(1, 1, 1, 1)
+shader_parameter/flash = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_pukvj"]
+
+[node name="zona_b" type="Node3D" unique_id=1929311012]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1130877158]
+material_override = SubResource("ShaderMaterial_qa2gp")
+mesh = SubResource("BoxMesh_pukvj")
+
+[node name="ControlEfectos" type="Node" parent="MeshInstance3D" unique_id=1716536506 node_paths=PackedStringArray("objetivo")]
+script = ExtResource("2_7ursy")
+objetivo = NodePath("..")
