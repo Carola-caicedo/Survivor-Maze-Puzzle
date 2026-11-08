@@ -3,12 +3,23 @@
 [ext_resource type="Shader" uid="uid://duwy53sah5ksn" path="res://efecto_objeto.gdshader" id="1_pjwgy"]
 [ext_resource type="Script" uid="uid://di32qvt5dhd3g" path="res://control_efectos.gd" id="2_7ursy"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1bvp3"]
+seed = 7
+frequency = 0.03
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h2yge"]
+noise = SubResource("FastNoiseLite_1bvp3")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qa2gp"]
 render_priority = 0
 shader = ExtResource("1_pjwgy")
 shader_parameter/color_base = Color(0.90588236, 0.29803923, 0.23529412, 1)
 shader_parameter/color_flash = Color(1, 1, 1, 1)
 shader_parameter/flash = 0.0
+shader_parameter/ruido = SubResource("NoiseTexture2D_h2yge")
+shader_parameter/avance = 0.0
+shader_parameter/ancho_borde = 0.06
+shader_parameter/color_borde = Color(1, 0.6, 0.1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_pukvj"]
 

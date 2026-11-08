@@ -5,9 +5,12 @@ extends Node
 @export var tecla := KEY_F
 @export var radio := 3.0           # m: hasta dónde lo alcanza un evento
 @export var dura_flash := 0.5      # s: lo que se nota el destello
+@export var dura_dissolve := 1.0    # s: cuánto tarda en desaparecer
 
 var mat: ShaderMaterial
 var flash := 0.0
+var avance := 0.0
+var disolviendo := false
 
 func _ready() -> void:
 	# Copia independiente: cada objeto tiene su propio material
@@ -21,8 +24,23 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_physical_key_pressed(tecla):
 		golpe()
+	# Añade esto temporalmente para probar el dissolve:
+	if Input.is_physical_key_pressed(KEY_G):
+		disolver()
+	# Decaimiento del flash
 	flash = decaer(flash, 0.0, k_para(dura_flash), delta)
 	mat.set_shader_parameter("flash", flash)
+	
+	# Dissolve progresivo
+	if disolviendo:
+		avance = avance_en(avance, delta, dura_dissolve)
+		mat.set_shader_parameter("avance", avance_visible(avance))
+		if avance >= 1.0:
+			objetivo.visible = false
+			disolviendo = false
+
+func disolver() -> void:
+	disolviendo = true
 
 func golpe() -> void:
 	flash = 1.0
@@ -39,3 +57,9 @@ static func decaer(actual: float, base: float, k: float, dt: float) -> float:
 
 static func k_para(duracion: float) -> float:
 	return 3.0 / duracion
+
+static func avance_en(actual: float, dt: float, duracion: float) -> float:
+	return minf(1.0, actual + dt / duracion)
+
+static func avance_visible(a: float) -> float:
+	return lerpf(0.2, 0.8, a)   # el tramo donde sí se ve desaparecer
