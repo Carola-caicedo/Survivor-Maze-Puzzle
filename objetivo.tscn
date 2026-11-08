@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d2085s0j4q45i"]
+
+[ext_resource type="Script" uid="uid://ddudhcldqdykp" path="res://objetivo.gd" id="1_ocde7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6pmnr"]
+radius = 0.7
+
+[sub_resource type="SphereMesh" id="SphereMesh_6pmnr"]
+radius = 0.3
+height = 0.6
+
+[node name="Objetivo" type="Area3D" unique_id=1374076160]
+script = ExtResource("1_ocde7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1986217480]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("SphereShape3D_6pmnr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2132370423]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("SphereMesh_6pmnr")
