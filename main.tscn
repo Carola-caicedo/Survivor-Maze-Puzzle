@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://personaje.gd" id="1_pj"]
 [ext_resource type="PackedScene" path="res://personaje/character-male-a.glb" id="2_modelo"]
 [ext_resource type="Script" path="res://espada.gd" id="4_1bvp3"]
+[ext_resource type="Script" path="res://interactuar.gd" id="5_lquwl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -50,7 +51,7 @@ shape = SubResource("PisoForma")
 
 [node name="Cajas" type="Node3D" parent="."]
 
-[node name="Caja1" type="StaticBody3D" parent="Cajas"]
+[node name="Caja1" type="StaticBody3D" parent="Cajas" groups=["interactivos"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, -4)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Cajas/Caja1"]
@@ -60,7 +61,7 @@ surface_material_override/0 = SubResource("CajaMat")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cajas/Caja1"]
 shape = SubResource("CajaForma")
 
-[node name="Caja2" type="StaticBody3D" parent="Cajas"]
+[node name="Caja2" type="StaticBody3D" parent="Cajas" groups=["interactivos"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.5, -2)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Cajas/Caja2"]
@@ -70,7 +71,7 @@ surface_material_override/0 = SubResource("CajaMat")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cajas/Caja2"]
 shape = SubResource("CajaForma")
 
-[node name="Caja3" type="StaticBody3D" parent="Cajas"]
+[node name="Caja3" type="StaticBody3D" parent="Cajas" groups=["interactivos"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 3)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Cajas/Caja3"]
@@ -97,3 +98,6 @@ transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
 
 [node name="Espada" type="Node" parent="Personaje"]
 script = ExtResource("4_1bvp3")
+
+[node name="Interactuar" type="Node" parent="Personaje"]
+script = ExtResource("5_lquwl")
