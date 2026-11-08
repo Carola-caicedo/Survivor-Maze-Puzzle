@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-enum Estado { ACERCARSE, AVISO, GOLPE, RECARGA }
+enum Estado { ACERCARSE, AVISO, GOLPE, RECARGA, HUIR }
 
 @export var rapidez = 2.0
 @export var rango_ataque = 1.5
@@ -9,6 +9,10 @@ enum Estado { ACERCARSE, AVISO, GOLPE, RECARGA }
 
 @export var alcance_golpe = 1.6
 @export var danio = 15
+
+@export var vida = 100.0
+@export var vida_huida = 30.0
+@export var danio_prueba = 25.0
 
 var estado = Estado.ACERCARSE
 var reloj = 0.0
@@ -25,6 +29,9 @@ func _physics_process(delta):
 	velocity += get_gravity() * delta
 	reloj = maxf(reloj - delta, 0.0)
 	
+	# Prueba: Enter le quita vida. Borren estas dos líneas al terminar.
+	if Input.is_action_just_pressed("ui_accept"):
+		recibir_golpe(danio_prueba)
 	var nuevo = decidir()
 	if nuevo != estado:
 		cambiar_a(nuevo)
@@ -40,11 +47,21 @@ func _physics_process(delta):
 			golpear()
 		Estado.RECARGA:
 			frenar("idle")
+		Estado.HUIR:
+			if jugador != null:
+				# Huir es perseguir con el vector director invertido
+				var lejos = global_position - jugador.global_position
+				lejos.y = 0.0
+				ir_a(global_position + lejos)
 	
 	move_and_slide()
 
 # Desde cada estado solo se puede pasar a uno: el ciclo del ataque.
 func decidir():
+	 # Va primero: le gana a cualquier estado, también al AVISO.
+	if vida <= vida_huida and vida > 0.0:
+		return Estado.HUIR
+	
 	match estado:
 		Estado.ACERCARSE:
 			if distancia() <= rango_ataque:
@@ -53,12 +70,21 @@ func decidir():
 			if reloj <= 0.001:
 				return Estado.GOLPE
 		Estado.GOLPE:
-			# El golpe dura un solo cuadro: pasa de inmediato a RECARGA
 			return Estado.RECARGA
 		Estado.RECARGA:
 			if reloj <= 0.001:
 				return Estado.ACERCARSE
+		Estado.HUIR:
+			return Estado.HUIR
 	return estado
+
+# Se llama igual que en la diana del Taller 8: el rayo ya la sabe usar.
+func recibir_golpe(cuanto):
+	vida -= cuanto
+	print(name, " vida ", vida)
+	if vida <= 0.0:
+		print(name, " vencido")
+		queue_free()
 
 
 func cambiar_a(nuevo):
