@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dasg24n6trd5e" path="res://salud.gd" id="7_5vw27"]
 [ext_resource type="PackedScene" uid="uid://ccd46sqcppw1j" path="res://golpeador.tscn" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://d2085s0j4q45i" path="res://objetivo.tscn" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://c2aletggvk2nn" path="res://salida.tscn" id="10_4c57u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -130,3 +131,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.6)
 
 [node name="Objetivo3" parent="." unique_id=1158250416 instance=ExtResource("9_kek77")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.4)
+
+[node name="Salida" parent="." unique_id=503925074 instance=ExtResource("10_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0)
