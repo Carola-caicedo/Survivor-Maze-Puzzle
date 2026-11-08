@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="2_modelo"]
 [ext_resource type="Script" uid="uid://8muj4gig7kts" path="res://espada.gd" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://g76pliv8lo3r" path="res://interactuar.gd" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://ccd46sqcppw1j" path="res://golpeador.tscn" id="7_272bh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -110,3 +111,6 @@ script = ExtResource("4_1bvp3")
 
 [node name="Interactuar" type="Node" parent="Personaje" unique_id=1103396318]
 script = ExtResource("5_lquwl")
+
+[node name="Golpeador" parent="." unique_id=602957092 instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 2)
