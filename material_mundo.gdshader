@@ -10,9 +10,16 @@ float onda(float x, float t, float a, float l, float p) {
 	return a * sin(TAU / l * x - TAU / p * t);
 }
 
+float pendiente(float x, float t, float a, float l, float p) {
+	return a * (TAU / l) * cos(TAU / l * x - TAU / p * t);
+}
+
 void vertex() {
 	float h = onda(VERTEX.x, TIME, amplitud, longitud, periodo);
 	VERTEX.y += h;
+	
+	float s = pendiente(VERTEX.x, TIME, amplitud, longitud, periodo);
+	NORMAL = normalize(vec3(-s, 1.0, 0.0));
 }
 
 void fragment() {
