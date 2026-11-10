@@ -1,4 +1,4 @@
 extends Node3D
 
 func _ready() -> void:
-	print(Toon.banda(0.866, 3.0), " ", Toon.banda(0.5, 3.0), " ", Toon.banda(0.259, 3.0))
+	print(Toon.fresnel(1.0, 3.0), " ", Toon.fresnel(0.866, 3.0), " ", Toon.fresnel(0.5, 3.0))

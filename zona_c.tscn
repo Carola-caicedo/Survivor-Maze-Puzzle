@@ -12,6 +12,8 @@ render_priority = 0
 shader = ExtResource("1_q4wug")
 shader_parameter/color_base = Color(0.20392157, 0.59607846, 0.85882354, 1)
 shader_parameter/bandas = 3.0
+shader_parameter/color_borde = Color(0.94509804, 0.76862746, 0.05882353, 1)
+shader_parameter/potencia = 3.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uxa2c"]
 
