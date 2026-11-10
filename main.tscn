@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://personaje.gd" id="1_pj"]
 [ext_resource type="PackedScene" path="res://personaje/character-male-a.glb" id="2_modelo"]
+[ext_resource type="Script" path="res://espada.gd" id="4_1bvp3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -85,6 +86,7 @@ transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 
 [node name="Personaje" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camara")]
 script = ExtResource("1_pj")
 camara = NodePath("../Camera3D")
+accion_prueba = "espada.F5"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Personaje"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
@@ -92,3 +94,6 @@ shape = SubResource("Capsula")
 
 [node name="Modelo" parent="Personaje" instance=ExtResource("2_modelo")]
 transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
+
+[node name="Espada" type="Node" parent="Personaje"]
+script = ExtResource("4_1bvp3")

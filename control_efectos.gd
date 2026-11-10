@@ -24,9 +24,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_physical_key_pressed(tecla):
 		golpe()
-	# Añade esto temporalmente para probar el dissolve:
-	if Input.is_physical_key_pressed(KEY_G):
-		disolver()
 	# Decaimiento del flash
 	flash = decaer(flash, 0.0, k_para(dura_flash), delta)
 	mat.set_shader_parameter("flash", flash)
