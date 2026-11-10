@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://b30yc3xba4cxa"]
+
+[ext_resource type="Script" uid="uid://bnjf6d0g11e82" path="res://zona_c.gd" id="1_gdjdl"]
+[ext_resource type="Shader" uid="uid://bcw2yxnfwww6b" path="res://material_personaje.gdshader" id="1_q4wug"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bn13o"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_uxa2c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_thsib"]
+render_priority = 0
+shader = ExtResource("1_q4wug")
+shader_parameter/color_base = Color(0.20392157, 0.59607846, 0.85882354, 1)
+shader_parameter/bandas = 3.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_uxa2c"]
+
+[node name="ZonaC" type="Node3D" unique_id=1133728192]
+script = ExtResource("1_gdjdl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1142833401]
+transform = Transform3D(0.8660254, 0.35355338, -0.35355338, 0, 0.70710677, 0.70710677, 0.5, -0.6123724, 0.6123724, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=928697287]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1579495479]
+material_override = SubResource("ShaderMaterial_bn13o")
+mesh = SubResource("SphereMesh_uxa2c")
+
+[node name="modelo" type="MeshInstance3D" parent="." unique_id=50970623]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25099003, -1.1920929e-07, 1.460234)
+material_override = SubResource("ShaderMaterial_thsib")
+mesh = SubResource("CapsuleMesh_uxa2c")
