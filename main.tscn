@@ -38,16 +38,16 @@ height = 1.75
 [node name="Main" type="Node3D" unique_id=368806357]
 
 [node name="zona_b4" parent="." unique_id=1929311012 instance=ExtResource("1_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5618854, 0, -4.873433)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.26123, 0, -4.554341)
 
 [node name="zona_b3" parent="." unique_id=1387998824 instance=ExtResource("1_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.091549, 0, -13.613588)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.237581, 0, -13.613588)
 
 [node name="zona_b2" parent="." unique_id=727331224 instance=ExtResource("1_h2yge")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.785, 0, 11.278)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.430754, 0, 12.19215)
 
 [node name="zona_b" parent="." unique_id=589018306 instance=ExtResource("1_h2yge")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.187, 0, 5.7284904)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.515137, 0, 5.6814647)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1841011218]
 environment = SubResource("Entorno")
@@ -81,10 +81,11 @@ surface_material_override/0 = SubResource("CajaMat")
 shape = SubResource("CajaForma")
 
 [node name="Fruta3" type="StaticBody3D" parent="Frutas" unique_id=2033221054 groups=["interactivos"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.80764, 0.5, 8.930685)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.80764, 0.5, 8.476532)
 script = ExtResource("2_7mycd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Frutas/Fruta3" unique_id=608080174]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.32704258)
 mesh = SubResource("CajaMalla")
 surface_material_override/0 = SubResource("CajaMat")
 
@@ -136,10 +137,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.096336, 0, -11.4666)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.939623, 0, -6.0806565)
 
 [node name="Salida" parent="." unique_id=503925074 instance=ExtResource("10_4c57u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18038654, 1, -16.58268)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2496211, 0, -16.531467)
 
 [node name="Laberinto" parent="." unique_id=1746071510 instance=ExtResource("12_dg77c")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -1.5413213)
+transform = Transform3D(-0.9999998, -0.00034557463, -0.0005397836, -0.0003455928, 0.99999994, 3.8668677e-05, 0.000539772, 3.8830523e-05, -0.9999999, 0.00083971024, -0.0013895035, -1.5598025)
 
 [node name="Guardian2" parent="." unique_id=1453112332 instance=ExtResource("7_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.2725177)

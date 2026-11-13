@@ -6,7 +6,7 @@
 size = Vector3(2, 2, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_efxa6"]
-size = Vector3(2, 2, 0.5)
+size = Vector3(2, 3.5, 0.5)
 
 [node name="Salida" type="Area3D" unique_id=503925074]
 script = ExtResource("1_0xb47")
