@@ -1,32 +1,34 @@
 extends CharacterBody3D
 
-enum Estado { PATRULLA, ACERCARSE, AVISO, GOLPE, RECARGA, HUIR }
+enum Estado { PATRULLAR, ESPERAR, ACERCARSE, AVISO, GOLPE, RECARGA, HUIR }
 
-# Configuración de patrulla y visión (Taller 7)
+# Configuración de patrulla (Taller 9 - Nivel 1)
 @export var rapidez = 2.0
+@export var espera = 1.0
+# Desplazamientos desde donde se colocó el NPC, no posiciones absolutas.
+@export var ruta: Array[Vector3] = [Vector3.ZERO, Vector3(0, 0, -6)]
+
+# Detección
 @export var radio_ver = 6.0
 @export var radio_perder = 9.0
-@export var puntos: Array[Vector3] = [
-	Vector3(-6, 0, -3),
-	Vector3(6, 0, -3)
-]
 
-# Configuración de combate (Taller 9)
+# Combate (conservados de Tarea B)
 @export var rango_ataque = 1.5
 @export var tiempo_aviso = 1.0
 @export var tiempo_recarga = 1.0
 @export var alcance_golpe = 1.6
 @export var danio = 15
 
-# Vida y huida
+# Vida y supervivencia
 @export var vida = 100.0
 @export var vida_huida = 30.0
 @export var danio_prueba = 25.0
 
 @export var objetivo: Node3D = null
 
-var estado = Estado.PATRULLA
-var punto = 0
+var estado = Estado.PATRULLAR
+var puntos: Array[Vector3] = []
+var indice = 0
 var reloj = 0.0
 var jugador: Node3D = null
 
@@ -45,6 +47,11 @@ func _buscar_anim() -> AnimationPlayer:
 
 
 func _ready():
+	# Inicializar la ruta relativa sumando a la posición inicial
+	puntos.clear()
+	for d in ruta:
+		puntos.append(global_position + d)
+
 	if objetivo != null:
 		jugador = objetivo
 	else:
@@ -64,13 +71,11 @@ func _physics_process(delta):
 		cambiar_a(nuevo)
 
 	match estado:
-		Estado.PATRULLA:
-			if puntos.size() > 0:
-				ir_a(puntos[punto])
-				if global_position.distance_to(puntos[punto]) < 0.4:
-					punto = (punto + 1) % puntos.size()
-			else:
-				frenar("idle")
+		Estado.PATRULLAR:
+			patrullar()
+
+		Estado.ESPERAR:
+			frenar("idle")
 
 		Estado.ACERCARSE:
 			if jugador != null:
@@ -90,7 +95,6 @@ func _physics_process(delta):
 
 		Estado.HUIR:
 			if jugador != null:
-				# Huir es alejarse en la dirección opuesta al jugador
 				var lejos = global_position - jugador.global_position
 				lejos.y = 0.0
 				ir_a(global_position + lejos)
@@ -101,21 +105,30 @@ func _physics_process(delta):
 
 
 func decidir() -> Estado:
-	# Huir tiene máxima prioridad si la vida está baja
+	# Prioridad máxima: huir si está herido
 	if vida <= vida_huida and vida > 0.0:
 		return Estado.HUIR
 
 	var d = distancia()
 
 	match estado:
-		Estado.PATRULLA:
+		Estado.PATRULLAR:
 			if jugador != null and d <= radio_ver:
 				return Estado.ACERCARSE
-			return Estado.PATRULLA
+			if reloj > 0.001:
+				return Estado.ESPERAR
+			return Estado.PATRULLAR
+
+		Estado.ESPERAR:
+			if jugador != null and d <= radio_ver:
+				return Estado.ACERCARSE
+			if reloj > 0.001:
+				return Estado.ESPERAR
+			return Estado.PATRULLAR
 
 		Estado.ACERCARSE:
 			if d > radio_perder:
-				return Estado.PATRULLA
+				return Estado.PATRULLAR
 			if d <= rango_ataque:
 				return Estado.AVISO
 			return Estado.ACERCARSE
@@ -135,7 +148,7 @@ func decidir() -> Estado:
 				elif d <= radio_perder:
 					return Estado.ACERCARSE
 				else:
-					return Estado.PATRULLA
+					return Estado.PATRULLAR
 			return Estado.RECARGA
 
 		Estado.HUIR:
@@ -146,11 +159,27 @@ func decidir() -> Estado:
 
 func cambiar_a(nuevo: Estado):
 	estado = nuevo
-	print(name, " -> ", Estado.keys()[estado], " a ", snappedf(distancia(), 0.01), " m")
+	print(name, " -> ", Estado.keys()[estado], " cuadro ",
+		Engine.get_physics_frames(), " en ", global_position.snappedf(0.01))
 	if estado == Estado.AVISO:
 		reloj = tiempo_aviso
 	elif estado == Estado.RECARGA:
 		reloj = tiempo_recarga
+
+
+func patrullar():
+	if puntos.is_empty():
+		frenar("idle")
+		return
+
+	var destino = puntos[indice]
+	if distancia_a(destino) < 0.1:
+		indice = (indice + 1) % puntos.size()
+		reloj = espera
+		frenar("idle")
+		return
+
+	ir_a(destino)
 
 
 func golpear():
@@ -198,9 +227,12 @@ func reproducir_anim(nombre: String):
 		anim.play(nombre)
 
 
+func distancia_a(p: Vector3) -> float:
+	var o = global_position
+	return Vector2(p.x - o.x, p.z - o.z).length()
+
+
 func distancia() -> float:
 	if jugador == null:
 		return 999.0
-	var p = jugador.global_position
-	var o = global_position
-	return Vector2(p.x - o.x, p.z - o.z).length()
+	return distancia_a(jugador.global_position)
