@@ -8,8 +8,8 @@ enum Estado { PATRULLAR, ESPERAR, ACERCARSE, AVISO, GOLPE, RECARGA, HUIR }
 # Desplazamientos desde donde se colocó el NPC, no posiciones absolutas.
 @export var ruta: Array[Vector3] = [Vector3.ZERO, Vector3(0, 0, -6)]
 
-# Detección
-@export var radio_ver = 6.0
+# Percepción visual con RayCast3D (Taller 9 - Nivel 2)
+@export var rango_vision = 7.0
 @export var radio_perder = 9.0
 
 # Combate (conservados de Tarea B)
@@ -33,6 +33,7 @@ var reloj = 0.0
 var jugador: Node3D = null
 
 @onready var anim: AnimationPlayer = _buscar_anim()
+@onready var vision: RayCast3D = $Vision if has_node("Vision") else null
 
 
 func _buscar_anim() -> AnimationPlayer:
@@ -47,7 +48,6 @@ func _buscar_anim() -> AnimationPlayer:
 
 
 func _ready():
-	# Inicializar la ruta relativa sumando a la posición inicial
 	puntos.clear()
 	for d in ruta:
 		puntos.append(global_position + d)
@@ -66,10 +66,16 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		recibir_golpe(danio_prueba)
 
-	var nuevo = decidir()
-	if nuevo != estado:
-		cambiar_a(nuevo)
+	# 1. MEDIR
+	var d = distancia()
+	var ve = lo_ve()
 
+	# 2. DECIDIR
+	var nuevo = decidir(d, ve)
+	if nuevo != estado:
+		cambiar_a(nuevo, d)
+
+	# 3. ACTUAR
 	match estado:
 		Estado.PATRULLAR:
 			patrullar()
@@ -104,23 +110,14 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func decidir() -> Estado:
+func decidir(d: float, ve: bool) -> Estado:
 	# Prioridad máxima: huir si está herido
 	if vida <= vida_huida and vida > 0.0:
 		return Estado.HUIR
 
-	var d = distancia()
-
 	match estado:
-		Estado.PATRULLAR:
-			if jugador != null and d <= radio_ver:
-				return Estado.ACERCARSE
-			if reloj > 0.001:
-				return Estado.ESPERAR
-			return Estado.PATRULLAR
-
-		Estado.ESPERAR:
-			if jugador != null and d <= radio_ver:
+		Estado.PATRULLAR, Estado.ESPERAR:
+			if d <= rango_vision and ve:
 				return Estado.ACERCARSE
 			if reloj > 0.001:
 				return Estado.ESPERAR
@@ -145,7 +142,7 @@ func decidir() -> Estado:
 			if reloj <= 0.001:
 				if d <= rango_ataque:
 					return Estado.AVISO
-				elif d <= radio_perder:
+				elif d <= radio_perder and ve:
 					return Estado.ACERCARSE
 				else:
 					return Estado.PATRULLAR
@@ -157,10 +154,29 @@ func decidir() -> Estado:
 	return estado
 
 
-func cambiar_a(nuevo: Estado):
+func lo_ve() -> bool:
+	if jugador == null:
+		return false
+	if vision == null:
+		return true
+
+	# Se apunta al pecho: el origen del jugador está en los pies
+	var pecho = jugador.global_position + Vector3(0, 0.9, 0)
+	vision.target_position = vision.to_local(pecho)
+	vision.force_raycast_update()
+
+	if vision.is_colliding():
+		# ¿Lo primero que tocó fue el jugador, o una pared?
+		return vision.get_collider() == jugador
+	return true
+
+
+func cambiar_a(nuevo: Estado, d: float = -1.0):
 	estado = nuevo
+	var dist_str = (" a " + str(snappedf(d, 0.01)) + " m") if d >= 0.0 else (" en " + str(global_position.snappedf(0.01)))
 	print(name, " -> ", Estado.keys()[estado], " cuadro ",
-		Engine.get_physics_frames(), " en ", global_position.snappedf(0.01))
+		Engine.get_physics_frames(), dist_str)
+
 	if estado == Estado.AVISO:
 		reloj = tiempo_aviso
 	elif estado == Estado.RECARGA:
