@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://dd8fgqa4gx"]
+
+[sub_resource type="GDScript" id="GDScript_1in30"]
+script/source = "@tool
+extends StaticBody3D
+## Muro recto: 0.5 m de grosor, 3.5 m de alto y largo configurable (minimo 2 m).
+## El largo va sobre el eje X local; rota el nodo 90 grados en Y para ponerlo \"vertical\".
+
+const GROSOR := 0.5
+const ALTO := 3.5
+const LARGO_MINIMO := 2.0
+
+@export_range(2.0, 200.0, 0.5, \"suffix:m\") var largo: float = 2.0:
+	set(valor):
+		largo = maxf(valor, LARGO_MINIMO)
+		if is_node_ready():
+			_actualizar()
+
+
+func _ready() -> void:
+	_actualizar()
+
+
+func _actualizar() -> void:
+	var malla := get_node_or_null(\"Malla\") as MeshInstance3D
+	var colision := get_node_or_null(\"Colision\") as CollisionShape3D
+	var tamano := Vector3(largo, ALTO, GROSOR)
+	if malla:
+		var nueva := BoxMesh.new()
+		nueva.size = tamano
+		if malla.mesh:
+			nueva.material = malla.mesh.material
+		malla.mesh = nueva
+	if colision:
+		var forma := BoxShape3D.new()
+		forma.size = tamano
+		colision.shape = forma
+"
+
+[sub_resource type="StandardMaterial3D" id="mat_muro"]
+albedo_color = Color(0.42, 0.38, 0.4, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="BoxMesh_beu6c"]
+material = SubResource("mat_muro")
+size = Vector3(2, 3.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rm5wr"]
+size = Vector3(2, 3.5, 0.5)
+
+[node name="Muro" type="StaticBody3D" unique_id=726964]
+script = SubResource("GDScript_1in30")
+
+[node name="Malla" type="MeshInstance3D" parent="." unique_id=1319478270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+mesh = SubResource("BoxMesh_beu6c")
+
+[node name="Colision" type="CollisionShape3D" parent="." unique_id=1067932832]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+shape = SubResource("BoxShape3D_rm5wr")
