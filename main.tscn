@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://d2085s0j4q45i" path="res://objetivo.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://c2aletggvk2nn" path="res://salida.tscn" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://7cir24paxtfm" path="res://laberinto.tscn" id="12_dg77c"]
+[ext_resource type="Script" uid="uid://wd8flliokisc" path="res://partida.gd" id="13_ycdy4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -94,13 +95,10 @@ transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 
 script = ExtResource("3_efxa6")
 objetivo = NodePath("../Personaje")
 distancia = Vector3(0, 6, 3)
-limite_min = Vector2(-24.5, -17)
 limite_max = Vector2(24, 17)
 
 [node name="Personaje" type="CharacterBody3D" parent="." unique_id=2042316050 node_paths=PackedStringArray("camara") groups=["jugador"]]
-
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.7023945)
-
 script = ExtResource("1_pj")
 camara = NodePath("../Camera3D")
 accion_prueba = "guardian.F5"
@@ -144,3 +142,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="Guardian2" parent="." unique_id=1453112332 instance=ExtResource("7_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.2725177)
+
+[node name="Partida" type="Node3D" parent="." unique_id=398105633]
+process_mode = 3
+script = ExtResource("13_ycdy4")

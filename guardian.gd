@@ -2,26 +2,21 @@ extends CharacterBody3D
 
 enum Estado { PATRULLAR, ESPERAR, PERSEGUIR, AVISO, GOLPE, RECARGA, BUSCAR, HUIR }
 
-# Configuración de patrulla (Taller 9 - Nivel 1)
 @export var rapidez = 2.0
 @export var espera = 1.0
 @export var ruta: Array[Vector3] = [Vector3.ZERO, Vector3(0, 0, -6)]
 
-# Percepción visual con RayCast3D (Taller 9 - Nivel 2)
 @export var rango_vision = 7.0
 
-# Histéresis y memoria de búsqueda (Taller 9 - Nivel 3)
 @export var rango_perder = 10.0
 @export var tiempo_busqueda = 3.0
 
-# Combate (conservados de Tarea B)
 @export var rango_ataque = 1.2
 @export var tiempo_aviso = 1.0
 @export var tiempo_recarga = 1.0
 @export var alcance_golpe = 1.6
 @export var danio = 15
 
-# Vida y supervivencia
 @export var vida = 100.0
 @export var vida_huida = 30.0
 @export var danio_prueba = 25.0
@@ -67,22 +62,18 @@ func _physics_process(delta):
 	reloj = maxf(reloj - delta, 0.0)
 	busca = maxf(busca - delta, 0.0)
 
-	# Tecla Enter para pruebas de daño al enemigo
 	if Input.is_action_just_pressed("ui_accept"):
 		recibir_golpe(danio_prueba)
 
-	# 1. MEDIR
 	var d = distancia()
 	var ve = lo_ve()
 	if ve and jugador != null:
 		ultimo_visto = jugador.global_position
 
-	# 2. DECIDIR
 	var nuevo = decidir(d, ve)
 	if nuevo != estado:
 		cambiar_a(nuevo, d)
 
-	# 3. ACTUAR
 	match estado:
 		Estado.PATRULLAR:
 			patrullar()
@@ -124,15 +115,12 @@ func _physics_process(delta):
 
 
 func decidir(d: float, ve: bool) -> Estado:
-	# Prioridad máxima: huir si está herido
 	if vida <= vida_huida and vida > 0.0:
 		return Estado.HUIR
 
 	var alerta = estado == Estado.PERSEGUIR or estado == Estado.AVISO or estado == Estado.GOLPE or estado == Estado.RECARGA
-	# Histéresis: si ya estaba alertado, el límite para soltarlo es mayor
 	var limite = rango_perder if alerta else rango_vision
 
-	# Ciclo de ataque si está en combate
 	if estado == Estado.AVISO:
 		if reloj <= 0.001:
 			return Estado.GOLPE
@@ -152,28 +140,22 @@ func decidir(d: float, ve: bool) -> Estado:
 				return Estado.BUSCAR
 		return Estado.RECARGA
 
-	# 1. Atacar si lo ve y está en rango de ataque
 	if ve and d <= rango_ataque:
 		return Estado.AVISO
 
-	# 2. Perseguir si lo ve dentro del límite con histéresis
 	if ve and d <= limite:
 		return Estado.PERSEGUIR
 
-	# 3. Si venía en alerta y lo perdió de vista, inicia búsqueda en último punto
 	if alerta:
 		busca = tiempo_busqueda
 		return Estado.BUSCAR
 
-	# 4. Mantenerse buscando mientras dure el temporizador
 	if busca > 0.001:
 		return Estado.BUSCAR
 
-	# 5. Espera en patrulla
 	if reloj > 0.001:
 		return Estado.ESPERAR
 
-	# 6. Patrullar por descarte
 	return Estado.PATRULLAR
 
 
@@ -183,7 +165,6 @@ func lo_ve() -> bool:
 	if vision == null:
 		return true
 
-	# Se apunta al pecho: el origen del jugador está en los pies
 	var pecho = jugador.global_position + Vector3(0, 0.9, 0)
 	vision.target_position = vision.to_local(pecho)
 	vision.force_raycast_update()
