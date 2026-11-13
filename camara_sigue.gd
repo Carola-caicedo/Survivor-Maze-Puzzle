@@ -4,6 +4,9 @@ extends Camera3D
 @export var distancia = Vector3(0, 12, 4)
 @export var suavizado = 3.0
 
+@export var limite_min = Vector2(-10.0, -10.0)   # x y z mínimas del nivel
+@export var limite_max = Vector2(10.0, 10.0)     # x y z máximas del nivel
+
 
 func _ready():
 	top_level = true
@@ -12,7 +15,11 @@ func _ready():
 
 
 func _physics_process(delta):
-	var destino = objetivo.global_position + distancia
+	var foco = objetivo.global_position
+	foco.x = clamp(foco.x, limite_min.x, limite_max.x)
+	foco.z = clamp(foco.z, limite_min.y, limite_max.y)
+
+	var destino = foco + distancia
 	global_position = global_position.lerp(destino, suavizado * delta)
 
 	# Medida (bórrenla al terminar):
