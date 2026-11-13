@@ -22,12 +22,6 @@ sky_material = SubResource("CieloMat")
 background_mode = 2
 sky = SubResource("Cielo")
 
-[sub_resource type="PlaneMesh" id="PisoMalla"]
-size = Vector2(30, 30)
-
-[sub_resource type="BoxShape3D" id="PisoForma"]
-size = Vector3(30, 0.2, 30)
-
 [sub_resource type="BoxMesh" id="CajaMalla"]
 
 [sub_resource type="StandardMaterial3D" id="CajaMat"]
@@ -59,15 +53,6 @@ environment = SubResource("Entorno")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1998494779]
 transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 6, 0)
 shadow_enabled = true
-
-[node name="Suelo" type="StaticBody3D" parent="." unique_id=1154712014]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Suelo" unique_id=419082926]
-mesh = SubResource("PisoMalla")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Suelo" unique_id=1729257392]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-shape = SubResource("PisoForma")
 
 [node name="Frutas" type="Node3D" parent="." unique_id=1317149282]
 
@@ -113,7 +98,9 @@ limite_min = Vector2(-24.5, -17)
 limite_max = Vector2(24, 17)
 
 [node name="Personaje" type="CharacterBody3D" parent="." unique_id=2042316050 node_paths=PackedStringArray("camara") groups=["jugador"]]
+
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.7023945)
+
 script = ExtResource("1_pj")
 camara = NodePath("../Camera3D")
 accion_prueba = "guardian.F5"
