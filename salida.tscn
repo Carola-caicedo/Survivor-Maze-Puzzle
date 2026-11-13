@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c2aletggvk2nn"]
+
+[ext_resource type="Script" uid="uid://8juv40unm6ql" path="res://salida.gd" id="1_0xb47"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6pmnr"]
+size = Vector3(2, 2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_efxa6"]
+size = Vector3(2, 2, 0.5)
+
+[node name="Salida" type="Area3D" unique_id=503925074]
+script = ExtResource("1_0xb47")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=738816202]
+shape = SubResource("BoxShape3D_6pmnr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=575580695]
+mesh = SubResource("BoxMesh_efxa6")
