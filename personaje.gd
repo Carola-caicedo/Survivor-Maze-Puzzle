@@ -1,13 +1,22 @@
 extends CharacterBody3D
 
+enum Estado { QUIETO, CAMINAR, CORRER, AIRE }
+const RUIDO = [0.0, 2.0, 6.0, 0.0]   # metros, en el orden del enum
+
 @export var camara: Camera3D
-@export var speed = 3.0
+@export var speed_caminar = 3.0
+@export var speed_correr = 6.0
+@export var tiempo_arranque = 0.25
 @onready var anim = $Modelo/AnimationPlayer
 
 # Enchufes: otros scripts (las acciones del juego) cambian estas tres variables.
 var multiplicador = 1.0     # 1 = rapidez normal, 0.5 = la mitad, 0 = quieto
 var empuje = Vector3.ZERO   # velocidad extra en m/s (dash, retroceso)
 var accion = ""             # animación de la acción; "" = ninguna
+var avance = Vector3.ZERO   # la parte de la velocidad que dan las teclas
+
+var estado = Estado.QUIETO
+var ruido = 0.0
 
 
 func _ready():
@@ -20,24 +29,59 @@ func _physics_process(delta):
 
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var entrada = Vector3(input_dir.x, 0.0, input_dir.y)
-	var direction = camara.global_basis * entrada
-	direction.y = 0.0
-	direction = direction.normalized()
 
-	velocity.x = direction.x * speed * multiplicador + empuje.x
-	velocity.z = direction.z * speed * multiplicador + empuje.z
+	var giro_cam = camara.global_rotation.y
+	var direction = entrada.rotated(Vector3.UP, giro_cam).normalized()
+
+	var corre = Input.is_action_pressed("correr")
+	var speed = speed_correr if corre else speed_caminar
+
+	var objetivo = direction * speed * multiplicador
+	var paso = speed / tiempo_arranque * delta
+	avance = avance.move_toward(objetivo, paso)
+
+	velocity.x = avance.x + empuje.x
+	velocity.z = avance.z + empuje.z
 
 	if direction.length() > 0:
 		basis = Basis.looking_at(direction)
-	if accion != "":
-		anim.play(accion)
-	elif direction.length() > 0:
-		anim.play("walk")
-	else:
-		anim.play("idle")
 
 	move_and_slide()
+
+	var antes = estado
+	estado = elegir_estado()
+	ruido = RUIDO[estado]
+	if estado != antes:
+		print("estado ", Estado.keys()[estado], " · ruido ", ruido, " m")
+	animar()
+
 	_prueba()
+
+
+func elegir_estado():
+	if not is_on_floor():
+		return Estado.AIRE
+	var rapidez = Vector2(velocity.x, velocity.z).length()
+	if rapidez < 0.1:
+		return Estado.QUIETO
+	if rapidez > speed_caminar + 0.1:
+		return Estado.CORRER
+	return Estado.CAMINAR
+
+
+func animar():
+	if accion != "":
+		anim.play(accion)
+		return
+	match estado:
+		Estado.QUIETO:
+			anim.play("idle")
+		Estado.CAMINAR:
+			anim.play("walk")
+		Estado.CORRER:
+			anim.play("sprint")
+		Estado.AIRE:
+			anim.play("fall")
 
 
 # ---------------------------------------------------------------------------
