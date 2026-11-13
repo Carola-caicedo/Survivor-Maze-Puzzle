@@ -1,19 +1,21 @@
 extends CharacterBody3D
 
-enum Estado { PATRULLAR, ESPERAR, ACERCARSE, AVISO, GOLPE, RECARGA, HUIR }
+enum Estado { PATRULLAR, ESPERAR, PERSEGUIR, AVISO, GOLPE, RECARGA, BUSCAR, HUIR }
 
 # Configuración de patrulla (Taller 9 - Nivel 1)
 @export var rapidez = 2.0
 @export var espera = 1.0
-# Desplazamientos desde donde se colocó el NPC, no posiciones absolutas.
 @export var ruta: Array[Vector3] = [Vector3.ZERO, Vector3(0, 0, -6)]
 
 # Percepción visual con RayCast3D (Taller 9 - Nivel 2)
 @export var rango_vision = 7.0
-@export var radio_perder = 9.0
+
+# Histéresis y memoria de búsqueda (Taller 9 - Nivel 3)
+@export var rango_perder = 10.0
+@export var tiempo_busqueda = 3.0
 
 # Combate (conservados de Tarea B)
-@export var rango_ataque = 1.5
+@export var rango_ataque = 1.2
 @export var tiempo_aviso = 1.0
 @export var tiempo_recarga = 1.0
 @export var alcance_golpe = 1.6
@@ -30,6 +32,8 @@ var estado = Estado.PATRULLAR
 var puntos: Array[Vector3] = []
 var indice = 0
 var reloj = 0.0
+var busca = 0.0
+var ultimo_visto = Vector3.ZERO
 var jugador: Node3D = null
 
 @onready var anim: AnimationPlayer = _buscar_anim()
@@ -61,6 +65,7 @@ func _ready():
 func _physics_process(delta):
 	velocity += get_gravity() * delta
 	reloj = maxf(reloj - delta, 0.0)
+	busca = maxf(busca - delta, 0.0)
 
 	# Tecla Enter para pruebas de daño al enemigo
 	if Input.is_action_just_pressed("ui_accept"):
@@ -69,6 +74,8 @@ func _physics_process(delta):
 	# 1. MEDIR
 	var d = distancia()
 	var ve = lo_ve()
+	if ve and jugador != null:
+		ultimo_visto = jugador.global_position
 
 	# 2. DECIDIR
 	var nuevo = decidir(d, ve)
@@ -83,7 +90,7 @@ func _physics_process(delta):
 		Estado.ESPERAR:
 			frenar("idle")
 
-		Estado.ACERCARSE:
+		Estado.PERSEGUIR:
 			if jugador != null:
 				ir_a(jugador.global_position)
 			else:
@@ -98,6 +105,12 @@ func _physics_process(delta):
 
 		Estado.RECARGA:
 			frenar("idle")
+
+		Estado.BUSCAR:
+			if distancia_a(ultimo_visto) > 0.1:
+				ir_a(ultimo_visto)
+			else:
+				frenar("idle")
 
 		Estado.HUIR:
 			if jugador != null:
@@ -115,43 +128,53 @@ func decidir(d: float, ve: bool) -> Estado:
 	if vida <= vida_huida and vida > 0.0:
 		return Estado.HUIR
 
-	match estado:
-		Estado.PATRULLAR, Estado.ESPERAR:
-			if d <= rango_vision and ve:
-				return Estado.ACERCARSE
-			if reloj > 0.001:
-				return Estado.ESPERAR
-			return Estado.PATRULLAR
+	var alerta = estado == Estado.PERSEGUIR or estado == Estado.AVISO or estado == Estado.GOLPE or estado == Estado.RECARGA
+	# Histéresis: si ya estaba alertado, el límite para soltarlo es mayor
+	var limite = rango_perder if alerta else rango_vision
 
-		Estado.ACERCARSE:
-			if d > radio_perder:
-				return Estado.PATRULLAR
-			if d <= rango_ataque:
+	# Ciclo de ataque si está en combate
+	if estado == Estado.AVISO:
+		if reloj <= 0.001:
+			return Estado.GOLPE
+		return Estado.AVISO
+
+	if estado == Estado.GOLPE:
+		return Estado.RECARGA
+
+	if estado == Estado.RECARGA:
+		if reloj <= 0.001:
+			if ve and d <= rango_ataque:
 				return Estado.AVISO
-			return Estado.ACERCARSE
+			elif ve and d <= limite:
+				return Estado.PERSEGUIR
+			elif alerta:
+				busca = tiempo_busqueda
+				return Estado.BUSCAR
+		return Estado.RECARGA
 
-		Estado.AVISO:
-			if reloj <= 0.001:
-				return Estado.GOLPE
-			return Estado.AVISO
+	# 1. Atacar si lo ve y está en rango de ataque
+	if ve and d <= rango_ataque:
+		return Estado.AVISO
 
-		Estado.GOLPE:
-			return Estado.RECARGA
+	# 2. Perseguir si lo ve dentro del límite con histéresis
+	if ve and d <= limite:
+		return Estado.PERSEGUIR
 
-		Estado.RECARGA:
-			if reloj <= 0.001:
-				if d <= rango_ataque:
-					return Estado.AVISO
-				elif d <= radio_perder and ve:
-					return Estado.ACERCARSE
-				else:
-					return Estado.PATRULLAR
-			return Estado.RECARGA
+	# 3. Si venía en alerta y lo perdió de vista, inicia búsqueda en último punto
+	if alerta:
+		busca = tiempo_busqueda
+		return Estado.BUSCAR
 
-		Estado.HUIR:
-			return Estado.HUIR
+	# 4. Mantenerse buscando mientras dure el temporizador
+	if busca > 0.001:
+		return Estado.BUSCAR
 
-	return estado
+	# 5. Espera en patrulla
+	if reloj > 0.001:
+		return Estado.ESPERAR
+
+	# 6. Patrullar por descarte
+	return Estado.PATRULLAR
 
 
 func lo_ve() -> bool:
@@ -166,7 +189,6 @@ func lo_ve() -> bool:
 	vision.force_raycast_update()
 
 	if vision.is_colliding():
-		# ¿Lo primero que tocó fue el jugador, o una pared?
 		return vision.get_collider() == jugador
 	return true
 
