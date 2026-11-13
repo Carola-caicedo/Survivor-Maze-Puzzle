@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cct4m0pdjhcq7" path="res://personaje.gd" id="1_pj"]
 [ext_resource type="Script" uid="uid://lrtnpfxqhiyb" path="res://fruta.gd" id="2_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="2_modelo"]
+[ext_resource type="Script" uid="uid://c4ncpqjuna8wv" path="res://camara_sigue.gd" id="3_efxa6"]
 [ext_resource type="Script" uid="uid://8muj4gig7kts" path="res://espada.gd" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://g76pliv8lo3r" path="res://interactuar.gd" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://dasg24n6trd5e" path="res://salud.gd" id="7_5vw27"]
@@ -93,8 +94,10 @@ surface_material_override/0 = SubResource("CajaMat")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Frutas/Fruta3" unique_id=927340922]
 shape = SubResource("CajaForma")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=26671349]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=26671349 node_paths=PackedStringArray("objetivo")]
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 5, 7)
+script = ExtResource("3_efxa6")
+objetivo = NodePath("../Personaje")
 
 [node name="Personaje" type="CharacterBody3D" parent="." unique_id=2042316050 node_paths=PackedStringArray("camara") groups=["jugador"]]
 script = ExtResource("1_pj")
