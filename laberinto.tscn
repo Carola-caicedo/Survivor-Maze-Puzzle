@@ -1,0 +1,193 @@
+[gd_scene format=3 uid="uid://7cir24paxtfm"]
+
+[ext_resource type="PackedScene" uid="uid://dd8fgqa4gx" path="res://muro.tscn" id="1_muro"]
+
+[sub_resource type="BoxShape3D" id="shape_piso"]
+size = Vector3(49, 0.4, 34)
+
+[sub_resource type="StandardMaterial3D" id="mat_piso"]
+albedo_color = Color(0.55, 0.45, 0.36, 1)
+
+[sub_resource type="BoxMesh" id="mesh_piso"]
+material = SubResource("mat_piso")
+size = Vector3(49, 0.4, 34)
+
+[node name="Laberinto" type="Node3D" unique_id=1746071510]
+
+[node name="Piso" type="StaticBody3D" parent="." unique_id=320178104]
+
+[node name="Colision" type="CollisionShape3D" parent="Piso" unique_id=2036377994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+shape = SubResource("shape_piso")
+
+[node name="Malla" type="MeshInstance3D" parent="Piso" unique_id=1715264731]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+mesh = SubResource("mesh_piso")
+
+[node name="Muros" type="Node3D" parent="." unique_id=1064888397]
+
+[node name="Muro001" parent="Muros" unique_id=29203365 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -15)
+largo = 21.5
+
+[node name="Muro002" parent="Muros" unique_id=1185468345 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -15)
+largo = 21.5
+
+[node name="Muro003" parent="Muros" unique_id=1366108044 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.848, 0, -12.265)
+largo = 5.0
+
+[node name="Muro005" parent="Muros" unique_id=1974451057 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+largo = 3.5
+
+[node name="Muro006" parent="Muros" unique_id=147250722 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -12)
+largo = 9.5
+
+[node name="Muro007" parent="Muros" unique_id=1160815838 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.384, 0, -9.026)
+largo = 4.5
+
+[node name="Muro008" parent="Muros" unique_id=24413950 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 16.5, 0, 3)
+largo = 12.5
+
+[node name="Muro009" parent="Muros" unique_id=1080933466 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -9)
+largo = 6.5
+
+[node name="Muro010" parent="Muros" unique_id=1139942577 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -9)
+largo = 3.5
+
+[node name="Muro011" parent="Muros" unique_id=1848421651 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.507379, 0, -6)
+largo = 10.5
+
+[node name="Muro012" parent="Muros" unique_id=958582750 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -6)
+largo = 6.5
+
+[node name="Muro013" parent="Muros" unique_id=830047911 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -3)
+largo = 36.5
+
+[node name="Muro014" parent="Muros" unique_id=2012473970 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 0)
+largo = 36.5
+
+[node name="Muro015" parent="Muros" unique_id=170714104 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 3)
+largo = 3.5
+
+[node name="Muro016" parent="Muros" unique_id=1925734619 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4414334, 0, 3.019)
+largo = 14.5
+
+[node name="Muro017" parent="Muros" unique_id=726964 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.803, 0, 12.042)
+largo = 15.0
+
+[node name="Muro018" parent="Muros" unique_id=705345198 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1.3313732, 0, 13.53363)
+largo = 3.5
+
+[node name="Muro019" parent="Muros" unique_id=1070455488 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 9)
+largo = 3.5
+
+[node name="Muro020" parent="Muros" unique_id=561297013 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.831, 0, 11.934)
+largo = 15.0
+
+[node name="Muro021" parent="Muros" unique_id=2013063264 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 15)
+largo = 21.5
+
+[node name="Muro022" parent="Muros" unique_id=967043492 instance=ExtResource("1_muro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 15)
+largo = 21.5
+
+[node name="Muro023" parent="Muros" unique_id=1378503398 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -22.5, 0, 0)
+largo = 30.5
+
+[node name="Muro024" parent="Muros" unique_id=1833881604 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -19.474, 0, -6.018)
+largo = 6.5
+
+[node name="Muro025" parent="Muros" unique_id=1162960983 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -19.5, 0, 7.5)
+largo = 9.5
+
+[node name="Muro026" parent="Muros" unique_id=1778518282 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -16.5, 0, 9)
+largo = 12.5
+
+[node name="Muro027" parent="Muros" unique_id=1883606960 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -15.352, 0, -10.535)
+largo = 3.5
+
+[node name="Muro028" parent="Muros" unique_id=791078308 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -13.5, 0, 7.5)
+largo = 9.5
+
+[node name="Muro029" parent="Muros" unique_id=900362821 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 19.5, 0, -1.5)
+largo = 21.5
+
+[node name="Muro030" parent="Muros" unique_id=351693062 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 22.5, 0, 0)
+largo = 30.5
+
+[node name="Muro031" parent="Muros" unique_id=1267657840 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -4.5, 0, -10.5)
+largo = 9.5
+
+[node name="Muro032" parent="Muros" unique_id=1455342240 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -1.5, 0, -10.5)
+largo = 3.5
+
+[node name="Muro033" parent="Muros" unique_id=954737165 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1.5, 0, -13.5)
+largo = 3.5
+
+[node name="Muro034" parent="Muros" unique_id=1936014033 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 16.5, 0, -7.5)
+largo = 3.5
+
+[node name="Muro035" parent="Muros" unique_id=1947553304 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 4.5, 0, -7.5)
+largo = 9.5
+
+[node name="Muro036" parent="Muros" unique_id=1393156578 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 4.5, 0, 7.398369)
+largo = 9.0
+
+[node name="Muro037" parent="Muros" unique_id=579152960 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 7.5, 0, -10.5)
+largo = 9.5
+
+[node name="Muro038" parent="Muros" unique_id=1616807834 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 7.5, 0, 4.5)
+largo = 9.5
+
+[node name="Muro039" parent="Muros" unique_id=645467779 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 10.5, 0, -9)
+largo = 6.5
+
+[node name="Muro040" parent="Muros" unique_id=1743821156 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 10.5, 0, 7.5)
+largo = 9.5
+
+[node name="Muro041" parent="Muros" unique_id=1393804331 instance=ExtResource("1_muro")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 13.5, 0, 6)
+largo = 12.5
+
+[node name="Inicio" type="Marker3D" parent="." unique_id=1673147249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -13.5)
+
+[node name="Salida" type="Marker3D" parent="." unique_id=1638629803]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 13.5)
