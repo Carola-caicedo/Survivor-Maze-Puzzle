@@ -62,9 +62,6 @@ func _physics_process(delta):
 	reloj = maxf(reloj - delta, 0.0)
 	busca = maxf(busca - delta, 0.0)
 
-	if Input.is_action_just_pressed("ui_accept"):
-		recibir_golpe(danio_prueba)
-
 	var d = distancia()
 	var ve = lo_ve()
 	if ve and jugador != null:

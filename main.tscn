@@ -37,17 +37,23 @@ height = 1.75
 
 [node name="Main" type="Node3D" unique_id=368806357]
 
-[node name="zona_b4" parent="." unique_id=1929311012 instance=ExtResource("1_h2yge")]
+[node name="zona_b4" parent="." unique_id=1929311012 node_paths=PackedStringArray("enemigo") instance=ExtResource("1_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.26123, 0, -4.554341)
+enemigo = NodePath("../Guardian2")
 
-[node name="zona_b3" parent="." unique_id=1387998824 instance=ExtResource("1_h2yge")]
+[node name="zona_b3" parent="." unique_id=1387998824 node_paths=PackedStringArray("enemigo") instance=ExtResource("1_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.237581, 0, -13.613588)
+es_entrada = true
+enemigo = NodePath("../Guardian2")
 
-[node name="zona_b2" parent="." unique_id=727331224 instance=ExtResource("1_h2yge")]
+[node name="zona_b2" parent="." unique_id=727331224 node_paths=PackedStringArray("enemigo") instance=ExtResource("1_h2yge")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.430754, 0, 12.19215)
+enemigo = NodePath("../Guardian")
 
-[node name="zona_b" parent="." unique_id=589018306 instance=ExtResource("1_h2yge")]
+[node name="zona_b" parent="." unique_id=589018306 node_paths=PackedStringArray("enemigo") instance=ExtResource("1_h2yge")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.515137, 0, 5.6814647)
+es_entrada = true
+enemigo = NodePath("../Guardian")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1841011218]
 environment = SubResource("Entorno")
@@ -124,6 +130,7 @@ script = ExtResource("7_5vw27")
 [node name="Guardian" parent="." unique_id=602957092 instance=ExtResource("7_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4763737, 0, 6.4198503)
 rapidez = 2.5
+ruta = Array[Vector3]([Vector3(0, 0, 0), Vector3(6.5, 0, 0)])
 rango_ataque = 1.3
 tiempo_recarga = 1.2
 
@@ -144,6 +151,10 @@ transform = Transform3D(-0.9999998, -0.00034557463, -0.0005397836, -0.0003455928
 
 [node name="Guardian2" parent="." unique_id=1453112332 instance=ExtResource("7_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.2725177)
+rapidez = 2.5
+ruta = Array[Vector3]([Vector3(0, 0, 0), Vector3(0, 0, -3.5), Vector3(0, 0, 2.5)])
+rango_ataque = 1.3
+tiempo_recarga = 1.2
 
 [node name="Partida" type="Node3D" parent="." unique_id=398105633]
 process_mode = 3

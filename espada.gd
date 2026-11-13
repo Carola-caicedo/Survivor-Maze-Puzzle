@@ -50,11 +50,13 @@ func empezar():
 	pj.empuje = -pj.basis.z * rapidez
 	pj.multiplicador = multiplicador_activa
 	pj.accion = animacion
-	vida_restante -= dano
-	print("empieza: ", tecla, " · daño ", dano, " · vida del enemigo ", max(vida_restante, 0))
-	if vida_restante <= 0:
-		print("enemigo vencido")
-		vida_restante = vida_enemigo
+	
+	for enemigo in get_tree().get_nodes_in_group("enemigos"):
+		var dist = pj.global_position.distance_to(enemigo.global_position)
+		if dist <= 2.2:
+			enemigo.recibir_golpe(dano)
+			break
+	print("empieza: ", tecla, " · daño ", dano)
 
 
 func terminar():
