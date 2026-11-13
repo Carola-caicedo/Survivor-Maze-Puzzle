@@ -3,7 +3,10 @@
 [ext_resource type="Script" uid="uid://8juv40unm6ql" path="res://salida.gd" id="1_0xb47"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6pmnr"]
-size = Vector3(2, 2, 0.5)
+size = Vector3(2, 3.5, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bloqueo"]
+size = Vector3(2, 3.5, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_efxa6"]
 size = Vector3(2, 3.5, 0.5)
@@ -16,3 +19,8 @@ shape = SubResource("BoxShape3D_6pmnr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=575580695]
 mesh = SubResource("BoxMesh_efxa6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=503925075]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=503925076]
+shape = SubResource("BoxShape3D_bloqueo")
