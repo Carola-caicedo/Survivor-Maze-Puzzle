@@ -41,20 +41,19 @@ func _actualizar() -> void:
 albedo_color = Color(0.42, 0.38, 0.4, 1)
 roughness = 0.95
 
-[sub_resource type="BoxMesh" id="BoxMesh_beu6c"]
+[sub_resource type="BoxMesh" id="BoxMesh_1in30"]
 material = SubResource("mat_muro")
 size = Vector3(2, 3.5, 0.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rm5wr"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_beu6c"]
 size = Vector3(2, 3.5, 0.5)
 
 [node name="Muro" type="StaticBody3D" unique_id=726964]
 script = SubResource("GDScript_1in30")
 
 [node name="Malla" type="MeshInstance3D" parent="." unique_id=1319478270]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
-mesh = SubResource("BoxMesh_beu6c")
+mesh = SubResource("BoxMesh_1in30")
 
 [node name="Colision" type="CollisionShape3D" parent="." unique_id=1067932832]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
-shape = SubResource("BoxShape3D_rm5wr")
+shape = SubResource("BoxShape3D_beu6c")
