@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="2_modelo"]
 [ext_resource type="Script" uid="uid://8muj4gig7kts" path="res://espada.gd" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://g76pliv8lo3r" path="res://interactuar.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://dasg24n6trd5e" path="res://salud.gd" id="7_5vw27"]
+[ext_resource type="PackedScene" uid="uid://ccd46sqcppw1j" path="res://golpeador.tscn" id="7_272bh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -92,11 +94,11 @@ shape = SubResource("CajaForma")
 [node name="Camera3D" type="Camera3D" parent="." unique_id=26671349]
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 5, 7)
 
-[node name="Personaje" type="CharacterBody3D" parent="." unique_id=2042316050 node_paths=PackedStringArray("camara")]
+[node name="Personaje" type="CharacterBody3D" parent="." unique_id=2042316050 node_paths=PackedStringArray("camara") groups=["jugador"]]
 script = ExtResource("1_pj")
 camara = NodePath("../Camera3D")
-prueba = 4
-accion_prueba = "interactuar.F5"
+prueba = 1
+accion_prueba = "golpeador.F5"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Personaje" unique_id=1745509103]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
@@ -110,3 +112,12 @@ script = ExtResource("4_1bvp3")
 
 [node name="Interactuar" type="Node" parent="Personaje" unique_id=1103396318]
 script = ExtResource("5_lquwl")
+
+[node name="Salud" type="Node" parent="Personaje" unique_id=208371855]
+script = ExtResource("7_5vw27")
+
+[node name="Golpeador" parent="." unique_id=602957092 instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3)
+rapidez = 2.5
+rango_ataque = 1.3
+tiempo_recarga = 1.2
