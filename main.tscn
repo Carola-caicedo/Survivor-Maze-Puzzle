@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c2aletggvk2nn" path="res://salida.tscn" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://7cir24paxtfm" path="res://laberinto.tscn" id="12_dg77c"]
 [ext_resource type="Script" uid="uid://wd8flliokisc" path="res://partida.gd" id="13_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://dbam43vuosh2g" path="res://hud.tscn" id="14_w48qg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -146,3 +147,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.2725177)
 [node name="Partida" type="Node3D" parent="." unique_id=398105633]
 process_mode = 3
 script = ExtResource("13_ycdy4")
+
+[node name="HUD" parent="." unique_id=1284440622 instance=ExtResource("14_w48qg")]
