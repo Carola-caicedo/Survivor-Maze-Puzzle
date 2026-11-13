@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ccd46sqcppw1j" path="res://golpeador.tscn" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://d2085s0j4q45i" path="res://objetivo.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://c2aletggvk2nn" path="res://salida.tscn" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://7cir24paxtfm" path="res://laberinto.tscn" id="12_dg77c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -98,6 +99,7 @@ shape = SubResource("CajaForma")
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 5, 7)
 script = ExtResource("3_efxa6")
 objetivo = NodePath("../Personaje")
+distancia = Vector3(0, 6, 3)
 
 [node name="Personaje" type="CharacterBody3D" parent="." unique_id=2042316050 node_paths=PackedStringArray("camara") groups=["jugador"]]
 script = ExtResource("1_pj")
@@ -137,3 +139,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.4)
 
 [node name="Salida" parent="." unique_id=503925074 instance=ExtResource("10_4c57u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0)
+
+[node name="Laberinto" parent="." unique_id=1746071510 instance=ExtResource("12_dg77c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5413213)
