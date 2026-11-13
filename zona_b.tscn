@@ -2,6 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://duwy53sah5ksn" path="res://efecto_objeto.gdshader" id="1_pjwgy"]
 [ext_resource type="Script" uid="uid://di32qvt5dhd3g" path="res://control_efectos.gd" id="2_7ursy"]
+[ext_resource type="Script" path="res://puerta.gd" id="3_puerta"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1bvp3"]
 seed = 7
@@ -24,7 +25,14 @@ shader_parameter/color_borde = Color(1, 0.6, 0.1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_pukvj"]
 size = Vector3(2, 3.5, 0.5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_puerta"]
+size = Vector3(2, 3.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sensor"]
+size = Vector3(2.2, 3.5, 2.5)
+
 [node name="zona_b" type="Node3D" unique_id=1929311012]
+script = ExtResource("3_puerta")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1130877158]
 material_override = SubResource("ShaderMaterial_qa2gp")
@@ -33,3 +41,13 @@ mesh = SubResource("BoxMesh_pukvj")
 [node name="ControlEfectos" type="Node" parent="MeshInstance3D" unique_id=1716536506 node_paths=PackedStringArray("objetivo")]
 script = ExtResource("2_7ursy")
 objetivo = NodePath("..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=194827104]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=194827105]
+shape = SubResource("BoxShape3D_puerta")
+
+[node name="Sensor" type="Area3D" parent="." unique_id=194827106]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sensor" unique_id=194827107]
+shape = SubResource("BoxShape3D_sensor")
