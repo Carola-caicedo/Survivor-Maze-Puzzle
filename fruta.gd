@@ -10,4 +10,4 @@ func usar():
 		salud.curar(curacion)
 	# Se retira del grupo para que el personaje no vuelva a detectarla
 	remove_from_group("interactivos")
-	visible = false
+	queue_free()
