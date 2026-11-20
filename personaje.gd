@@ -7,6 +7,7 @@ const RUIDO = [0.0, 2.0, 6.0, 0.0]   # metros, en el orden del enum
 @export var speed_caminar = 3.0
 @export var speed_correr = 6.0
 @export var tiempo_arranque = 0.25
+@export var fuerza_salto = 5.0
 @onready var anim = $Modelo/AnimationPlayer
 
 # Enchufes: otros scripts (las acciones del juego) cambian estas tres variables.
@@ -26,6 +27,9 @@ func _ready():
 
 func _physics_process(delta):
 	velocity += get_gravity() * delta
+
+	if Input.is_action_just_pressed("saltar") and is_on_floor():
+		velocity.y = fuerza_salto
 
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var entrada = Vector3(input_dir.x, 0.0, input_dir.y)
@@ -81,7 +85,10 @@ func animar():
 		Estado.CORRER:
 			anim.play("sprint")
 		Estado.AIRE:
-			anim.play("fall")
+			if anim.has_animation("jump"):
+				anim.play("jump")
+			else:
+				anim.play("fall")
 
 
 # ---------------------------------------------------------------------------
