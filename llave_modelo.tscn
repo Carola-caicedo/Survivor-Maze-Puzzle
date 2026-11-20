@@ -1,0 +1,44 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="Mat_llave"]
+albedo_color = Color(1, 0.8, 0.15, 1)
+metallic = 0.9
+roughness = 0.3
+emission_enabled = true
+emission = Color(1, 0.7, 0.1, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="TorusMesh" id="Malla_anillo"]
+material = SubResource("Mat_llave")
+inner_radius = 0.07
+outer_radius = 0.14
+
+[sub_resource type="BoxMesh" id="Malla_vastago"]
+material = SubResource("Mat_llave")
+size = Vector3(0.5, 0.07, 0.07)
+
+[sub_resource type="BoxMesh" id="Malla_diente_a"]
+material = SubResource("Mat_llave")
+size = Vector3(0.07, 0.07, 0.17)
+
+[sub_resource type="BoxMesh" id="Malla_diente_b"]
+material = SubResource("Mat_llave")
+size = Vector3(0.07, 0.07, 0.12)
+
+[node name="LlaveModelo" type="Node3D"]
+
+[node name="Anillo" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38, 0, 0)
+mesh = SubResource("Malla_anillo")
+
+[node name="Vastago" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("Malla_vastago")
+
+[node name="DienteA" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21, 0, 0.085)
+mesh = SubResource("Malla_diente_a")
+
+[node name="DienteB" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 0, 0.06)
+mesh = SubResource("Malla_diente_b")
