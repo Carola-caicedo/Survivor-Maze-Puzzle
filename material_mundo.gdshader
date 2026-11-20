@@ -1,6 +1,5 @@
 shader_type spatial;
 
-uniform vec3 color_bajo : source_color = vec3(0.172, 0.184, 0.200); 
 uniform vec3 color_bajo : source_color = vec3(0.172, 0.184, 0.200);
 uniform vec3 color_alto : source_color = vec3(0.180, 0.800, 0.443);
 

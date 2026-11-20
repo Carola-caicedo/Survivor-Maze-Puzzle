@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://7cir24paxtfm" path="res://laberinto.tscn" id="12_dg77c"]
 [ext_resource type="Script" uid="uid://wd8flliokisc" path="res://partida.gd" id="13_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://dbam43vuosh2g" path="res://hud.tscn" id="14_w48qg"]
+[ext_resource type="PackedScene" uid="uid://bts8qwxctvwti" path="res://zona_a.tscn" id="15_zona_a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -61,6 +62,7 @@ environment = SubResource("Entorno")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1998494779]
 transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 6, 0)
 shadow_enabled = true
+sky_mode = 1
 
 [node name="Frutas" type="Node3D" parent="." unique_id=1317149282]
 
@@ -161,3 +163,14 @@ process_mode = 3
 script = ExtResource("13_ycdy4")
 
 [node name="HUD" parent="." unique_id=1284440622 instance=ExtResource("14_w48qg")]
+
+[node name="Trampas" type="Node3D" parent="." unique_id=987654321]
+
+[node name="Trampa1" parent="Trampas" unique_id=987654322 instance=ExtResource("15_zona_a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.509161, 0.01, 4.8405857)
+
+[node name="Trampa2" parent="Trampas" unique_id=137134571 instance=ExtResource("15_zona_a")]
+transform = Transform3D(0.9999956, 0.0008626766, -0.0028293699, -0.00085513137, 0.99999607, 0.00266777, 0.0028316595, -0.0026653397, 0.9999924, 17.949104, 0.01, -10.840356)
+
+[node name="Trampa3" parent="Trampas" unique_id=590575464 instance=ExtResource("15_zona_a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12284, 0, -7.502692)

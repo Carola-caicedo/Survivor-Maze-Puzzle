@@ -6,15 +6,13 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4smxp"]
 render_priority = 0
 shader = ExtResource("1_rsxdq")
-shader_parameter/color_bajo = Color(0.172, 0.184, 0.2, 1)
-shader_parameter/amplitud = 0.06
-shader_parameter/longitud = 1.0
-shader_parameter/periodo = 2.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2py4y"]
-size = Vector2(3, 3)
-subdivide_width = 43
-subdivide_depth = 1
+subdivide_width = 30
+subdivide_depth = 30
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trampa"]
+size = Vector3(2, 0.1, 2)
 
 [node name="ZonaA" type="Node3D" unique_id=137134571]
 script = ExtResource("1_l7qun")
@@ -23,8 +21,8 @@ script = ExtResource("1_l7qun")
 material_override = SubResource("ShaderMaterial_4smxp")
 mesh = SubResource("PlaneMesh_2py4y")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1870514537]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 3, 0)
+[node name="Trampa" type="Area3D" parent="." unique_id=1946526400]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1104981496]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 3, 4)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trampa" unique_id=1946526401]
+shape = SubResource("BoxShape3D_trampa")
