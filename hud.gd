@@ -9,6 +9,10 @@ extends CanvasLayer
 @onready var label_salida = $Margen/Arriba/Derecha/Salida
 @onready var label_intentos = $Margen/Arriba/Derecha/Intentos
 @onready var label_interaccion = $Margen/Abajo/Interaccion
+@onready var centro_mensaje = $Margen/CentroMensaje
+@onready var label_titulo = $Margen/CentroMensaje/Titulo
+@onready var label_detalle = $Margen/CentroMensaje/Detalle
+@onready var label_subdetalle = $Margen/CentroMensaje/Subdetalle
 
 var jugador: CharacterBody3D = null
 var salud: Node = null
@@ -27,6 +31,8 @@ func _ready():
 			interactuar = jugador.get_node("Interactuar")
 
 	partida = get_tree().get_first_node_in_group("partida")
+	if partida != null and partida.has_signal("fin_partida"):
+		partida.fin_partida.connect(_al_terminar_partida)
 
 	var objs = get_tree().get_nodes_in_group("objetivos")
 	if objs.size() > 0:
@@ -41,6 +47,7 @@ func _process(_delta):
 	actualizar_objetivos()
 	actualizar_enemigo()
 	actualizar_interaccion()
+	verificar_fin_partida()
 
 func mostrar(vida):
 	texto.text = "Vida: " + str(vida)
@@ -95,3 +102,26 @@ func actualizar_interaccion():
 		label_interaccion.text = "Comiendo fruta... " + str(pct) + "%"
 	else:
 		label_interaccion.visible = false
+
+func verificar_fin_partida():
+	if partida != null and "estado" in partida and partida.estado != 0 and not centro_mensaje.visible:
+		var motivo = partida.motivo_fin if "motivo_fin" in partida else ""
+		_al_terminar_partida(partida.estado == 1, motivo)
+
+func _al_terminar_partida(gano: bool, motivo: String):
+	centro_mensaje.visible = true
+	if gano:
+		label_titulo.text = "VICTORIA"
+		var t = maxf(partida.tiempo_limite - partida.tiempo, 0.0) if partida != null else 0.0
+		var min = int(t) / 60
+		var sec = int(t) % 60
+		label_detalle.text = "Completado en %02d:%02d" % [min, sec]
+	else:
+		label_titulo.text = "DERROTA"
+		if motivo == "sin vida":
+			label_detalle.text = "Te quedaste sin vidas"
+		elif motivo == "se acabó el tiempo":
+			label_detalle.text = "Se acabo el tiempo"
+		else:
+			label_detalle.text = "Fin de la partida"
+	label_subdetalle.text = "Reiniciando..."

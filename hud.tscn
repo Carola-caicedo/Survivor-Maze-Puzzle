@@ -90,6 +90,31 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Intento: 2"
 
+[node name="CentroMensaje" type="VBoxContainer" parent="Margen" unique_id=987123456]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Titulo" type="Label" parent="Margen/CentroMensaje" unique_id=987123457]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "VICTORIA"
+horizontal_alignment = 1
+
+[node name="Detalle" type="Label" parent="Margen/CentroMensaje" unique_id=987123458]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Escapaste del laberinto"
+horizontal_alignment = 1
+
+[node name="Subdetalle" type="Label" parent="Margen/CentroMensaje" unique_id=987123459]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Reiniciando..."
+horizontal_alignment = 1
+
 [node name="Abajo" type="VBoxContainer" parent="Margen" unique_id=364108626]
 layout_mode = 2
 size_flags_horizontal = 4

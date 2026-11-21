@@ -2,6 +2,8 @@ extends Node
 
 enum Estado { JUGANDO, GANO, PERDIO }
 
+signal fin_partida(gano: bool, motivo: String)
+
 @export var tiempo_limite = 900.0
 @export var gana_con_tiempo = false
 # Cuántas metas hay que cumplir para ganar. 0 = no se cuentan.
@@ -15,6 +17,7 @@ var estado = Estado.JUGANDO
 var tiempo = 0.0
 var hechas = 0
 var reloj = 0.0
+var motivo_fin = ""
 
 func _ready():
 	# Always: este nodo sigue vivo aunque el juego quede en pausa.
@@ -55,12 +58,14 @@ func terminar(nuevo: Estado, motivo: String):
 	if estado != Estado.JUGANDO:
 		return
 	estado = nuevo
+	motivo_fin = motivo
 	print("fin: ", Estado.keys()[estado], " cuadro ", Engine.get_physics_frames(), " (", motivo, ")")
 	get_tree().paused = true
 	reloj = espera_reinicio
 	var usado = tiempo_limite - tiempo
 	if estado == Estado.GANO and (mejor == 0.0 or usado < mejor):
 		mejor = usado
+	fin_partida.emit(estado == Estado.GANO, motivo)
 
 func reiniciar():
 	intentos += 1
