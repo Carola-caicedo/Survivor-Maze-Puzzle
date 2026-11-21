@@ -49,9 +49,15 @@ func avisar_meta():
 		ganar()
 
 func ganar():
+	if has_node("/root/Sonidos"):
+		Sonidos.stop_musica()
+		Sonidos.play_victoria()
 	terminar(Estado.GANO, "ganó")
 
 func perder(motivo: String):
+	if has_node("/root/Sonidos"):
+		Sonidos.stop_musica()
+		Sonidos.play_derrota()
 	terminar(Estado.PERDIO, motivo)
 
 func terminar(nuevo: Estado, motivo: String):
@@ -71,4 +77,6 @@ func reiniciar():
 	intentos += 1
 	# Primero quitar la pausa: si no, la escena nueva nace congelada.
 	get_tree().paused = false
+	if has_node("/root/Sonidos"):
+		Sonidos.play_musica()
 	get_tree().reload_current_scene()

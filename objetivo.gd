@@ -18,6 +18,8 @@ func _al_entrar(cuerpo):
 	var faltan = get_tree().get_nodes_in_group("objetivos").size() - 1
 	print(name, " +", valor, " · faltan ", faltan, " · cuadro ", Engine.get_physics_frames())
 	recogido.emit(valor)
+	if has_node("/root/Sonidos"):
+		Sonidos.play_llave()
 	var partida = get_tree().get_first_node_in_group("partida")
 	if partida != null:
 		partida.avisar_meta()
