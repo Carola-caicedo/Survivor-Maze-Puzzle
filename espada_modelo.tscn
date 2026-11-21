@@ -1,0 +1,49 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="Mat_hoja"]
+albedo_color = Color(0.82, 0.86, 0.9, 1)
+metallic = 0.85
+roughness = 0.25
+
+[sub_resource type="StandardMaterial3D" id="Mat_oro"]
+albedo_color = Color(0.9, 0.7, 0.2, 1)
+metallic = 0.8
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="Mat_mango"]
+albedo_color = Color(0.35, 0.2, 0.1, 1)
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="Malla_hoja"]
+material = SubResource("Mat_hoja")
+size = Vector3(0.008, 0.035, 0.2)
+
+[sub_resource type="BoxMesh" id="Malla_guarda"]
+material = SubResource("Mat_oro")
+size = Vector3(0.016, 0.09, 0.014)
+
+[sub_resource type="BoxMesh" id="Malla_mango"]
+material = SubResource("Mat_mango")
+size = Vector3(0.02, 0.02, 0.07)
+
+[sub_resource type="SphereMesh" id="Malla_pomo"]
+material = SubResource("Mat_oro")
+radius = 0.016
+height = 0.032
+
+[node name="EspadaModelo" type="Node3D"]
+
+[node name="Hoja" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.152)
+mesh = SubResource("Malla_hoja")
+
+[node name="Guarda" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.045)
+mesh = SubResource("Malla_guarda")
+
+[node name="Mango" type="MeshInstance3D" parent="."]
+mesh = SubResource("Malla_mango")
+
+[node name="Pomo" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.04)
+mesh = SubResource("Malla_pomo")
