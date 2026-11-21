@@ -13,6 +13,7 @@ var pos_enemigo: Vector3 = Vector3.ZERO
 var distancia_al_enemigo: float = 0.0
 var sellada: bool = false
 var ya_abierta: bool = false
+var salud_conectada: bool = false
 
 func _ready() -> void:
 	tiene_enemigo = (enemigo != null)
@@ -21,6 +22,7 @@ func _ready() -> void:
 		distancia_al_enemigo = global_position.distance_to(pos_enemigo)
 
 	sensor.body_exited.connect(_on_sensor_body_exited)
+	_conectar_salud()
 
 	if es_entrada:
 		# La puerta de entrada empieza abierta para que el jugador pueda entrar al cuarto
@@ -32,6 +34,8 @@ func _ready() -> void:
 		colision.set_deferred("disabled", false)
 
 func _process(_delta: float) -> void:
+	if not salud_conectada:
+		_conectar_salud()
 	# Cuando el enemigo asignado es derrotado (liberado con queue_free)
 	if tiene_enemigo and not ya_abierta and not is_instance_valid(enemigo):
 		abrir_puerta()
@@ -60,3 +64,24 @@ func abrir_puerta() -> void:
 	if efectos != null:
 		efectos.disolver()
 	print(name, ": puerta desbloqueada tras derrotar al enemigo")
+
+func _conectar_salud() -> void:
+	if salud_conectada:
+		return
+	var pj = get_tree().get_first_node_in_group("jugador")
+	if pj != null and pj.has_node("Salud"):
+		pj.get_node("Salud").sin_vida.connect(_al_morir_jugador)
+		salud_conectada = true
+
+func _al_morir_jugador() -> void:
+	if not is_instance_valid(enemigo):
+		return
+	if es_entrada and sellada:
+		sellada = false
+		malla.visible = false
+		colision.set_deferred("disabled", true)
+		if efectos != null:
+			efectos.disolviendo = false
+			efectos.avance = 0.0
+			efectos.mat.set_shader_parameter("avance", 0.0)
+		print(name, ": puerta reabierta tras revivir el jugador")
