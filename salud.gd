@@ -48,6 +48,8 @@ func _al_quedar_sin_vida():
 		pj.global_position = punto
 		reloj = espera_reaparecer
 		cambio.emit(vida)
+		if has_node("/root/Sonidos"):
+			Sonidos.play_respawn()
 		print("reaparece cuadro ", Engine.get_physics_frames())
 		return
 	var partida = get_tree().get_first_node_in_group("partida")

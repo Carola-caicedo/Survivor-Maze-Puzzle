@@ -18,6 +18,7 @@ var avance = Vector3.ZERO   # la parte de la velocidad que dan las teclas
 
 var estado = Estado.QUIETO
 var ruido = 0.0
+var reloj_paso = 0.0
 
 
 func _ready():
@@ -58,6 +59,15 @@ func _physics_process(delta):
 	if estado != antes:
 		print("estado ", Estado.keys()[estado], " · ruido ", ruido, " m")
 	animar()
+
+	if is_on_floor() and (estado == Estado.CAMINAR or estado == Estado.CORRER):
+		reloj_paso -= delta
+		if reloj_paso <= 0.0:
+			if has_node("/root/Sonidos"):
+				Sonidos.play_paso()
+			reloj_paso = 0.28 if estado == Estado.CORRER else 0.45
+	else:
+		reloj_paso = 0.0
 
 	_prueba()
 
