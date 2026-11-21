@@ -22,7 +22,6 @@ float pendiente(float x, float t, float a, float l, float p) {
 }
 
 void vertex() {
-	float h = onda(VERTEX.x, TIME, amplitud, longitud, periodo);
 	float h = onda(VERTEX.x, TIME, amplitud, longitud, periodo)
 	        + onda(VERTEX.x, TIME, amplitud2, longitud2, periodo2);
 
@@ -30,8 +29,6 @@ void vertex() {
 	        + pendiente(VERTEX.x, TIME, amplitud2, longitud2, periodo2);
 
 	VERTEX.y += h;
-	
-	float s = pendiente(VERTEX.x, TIME, amplitud, longitud, periodo);
 	NORMAL = normalize(vec3(-s, 1.0, 0.0));
 
 	altura = h;

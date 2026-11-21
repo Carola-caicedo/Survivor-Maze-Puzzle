@@ -11,12 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://b5fk2eukw5pdc" path="res://guardian.tscn" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://d2085s0j4q45i" path="res://objetivo.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://c2aletggvk2nn" path="res://salida.tscn" id="10_4c57u"]
-[ext_resource type="PackedScene" path="res://fruta_modelo.tscn" id="20_fruta"]
-[ext_resource type="Script" path="res://espada_en_mano.gd" id="21_espmano"]
 [ext_resource type="PackedScene" uid="uid://7cir24paxtfm" path="res://laberinto.tscn" id="12_dg77c"]
 [ext_resource type="Script" uid="uid://wd8flliokisc" path="res://partida.gd" id="13_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://dbam43vuosh2g" path="res://hud.tscn" id="14_w48qg"]
 [ext_resource type="PackedScene" uid="uid://bts8qwxctvwti" path="res://zona_a.tscn" id="15_zona_a"]
+[ext_resource type="PackedScene" path="res://fruta_modelo.tscn" id="20_fruta"]
+[ext_resource type="Script" uid="uid://bee5smbuw6vsf" path="res://espada_en_mano.gd" id="21_espmano"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -68,7 +68,7 @@ sky_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.231888, 0.5, -8.732496)
 script = ExtResource("2_7mycd")
 
-[node name="Modelo" parent="Frutas/Fruta1" instance=ExtResource("20_fruta")]
+[node name="Modelo" parent="Frutas/Fruta1" unique_id=1585584877 instance=ExtResource("20_fruta")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Frutas/Fruta1" unique_id=1502254874]
 shape = SubResource("FrutaForma")
@@ -77,7 +77,7 @@ shape = SubResource("FrutaForma")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27512836, 0.5, 8.985465)
 script = ExtResource("2_7mycd")
 
-[node name="Modelo" parent="Frutas/Fruta2" instance=ExtResource("20_fruta")]
+[node name="Modelo" parent="Frutas/Fruta2" unique_id=320297182 instance=ExtResource("20_fruta")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Frutas/Fruta2" unique_id=1243797172]
 shape = SubResource("FrutaForma")
@@ -86,7 +86,7 @@ shape = SubResource("FrutaForma")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.80764, 0.5, 8.476532)
 script = ExtResource("2_7mycd")
 
-[node name="Modelo" parent="Frutas/Fruta3" instance=ExtResource("20_fruta")]
+[node name="Modelo" parent="Frutas/Fruta3" unique_id=1349824289 instance=ExtResource("20_fruta")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Frutas/Fruta3" unique_id=927340922]
 shape = SubResource("FrutaForma")
@@ -114,7 +114,7 @@ transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
 [node name="Espada" type="Node" parent="Personaje" unique_id=204470823]
 script = ExtResource("4_1bvp3")
 
-[node name="EspadaVisual" type="Node" parent="Personaje"]
+[node name="EspadaVisual" type="Node" parent="Personaje" unique_id=1633377387]
 script = ExtResource("21_espmano")
 
 [node name="Interactuar" type="Node" parent="Personaje" unique_id=1103396318]
@@ -159,6 +159,7 @@ script = ExtResource("13_ycdy4")
 [node name="HUD" parent="." unique_id=1284440622 instance=ExtResource("14_w48qg")]
 
 [node name="Trampas" type="Node3D" parent="." unique_id=987654321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
 [node name="Trampa1" parent="Trampas" unique_id=987654322 instance=ExtResource("15_zona_a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.509161, 0.01, 4.8405857)
@@ -168,3 +169,8 @@ transform = Transform3D(0.9999956, 0.0008626766, -0.0028293699, -0.00085513137, 
 
 [node name="Trampa3" parent="Trampas" unique_id=590575464 instance=ExtResource("15_zona_a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12284, 0, -7.502692)
+
+[node name="Trampa4" parent="Trampas" unique_id=111454383 instance=ExtResource("15_zona_a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.823803, 0, -0.11999655)
+
+[editable path="Guardian"]
