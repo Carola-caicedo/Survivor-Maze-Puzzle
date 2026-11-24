@@ -2,6 +2,8 @@ extends Node
 
 enum Estado { JUGANDO, GANO, PERDIO }
 
+signal fin_partida(gano: bool, motivo: String)
+
 @export var tiempo_limite = 900.0
 @export var gana_con_tiempo = false
 # Cuántas metas hay que cumplir para ganar. 0 = no se cuentan.
@@ -15,6 +17,7 @@ var estado = Estado.JUGANDO
 var tiempo = 0.0
 var hechas = 0
 var reloj = 0.0
+var motivo_fin = ""
 
 func _ready():
 	# Always: este nodo sigue vivo aunque el juego quede en pausa.
@@ -46,24 +49,34 @@ func avisar_meta():
 		ganar()
 
 func ganar():
+	if has_node("/root/Sonidos"):
+		Sonidos.stop_musica()
+		Sonidos.play_victoria()
 	terminar(Estado.GANO, "ganó")
 
 func perder(motivo: String):
+	if has_node("/root/Sonidos"):
+		Sonidos.stop_musica()
+		Sonidos.play_derrota()
 	terminar(Estado.PERDIO, motivo)
 
 func terminar(nuevo: Estado, motivo: String):
 	if estado != Estado.JUGANDO:
 		return
 	estado = nuevo
+	motivo_fin = motivo
 	print("fin: ", Estado.keys()[estado], " cuadro ", Engine.get_physics_frames(), " (", motivo, ")")
 	get_tree().paused = true
 	reloj = espera_reinicio
 	var usado = tiempo_limite - tiempo
 	if estado == Estado.GANO and (mejor == 0.0 or usado < mejor):
 		mejor = usado
+	fin_partida.emit(estado == Estado.GANO, motivo)
 
 func reiniciar():
 	intentos += 1
 	# Primero quitar la pausa: si no, la escena nueva nace congelada.
 	get_tree().paused = false
+	if has_node("/root/Sonidos"):
+		Sonidos.play_musica()
 	get_tree().reload_current_scene()

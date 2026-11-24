@@ -3,10 +3,127 @@
 [ext_resource type="Script" uid="uid://bhnv5xdyucxpp" path="res://hud.gd" id="1_37p78"]
 
 [node name="HUD" type="CanvasLayer" unique_id=1284440622]
+process_mode = 3
 script = ExtResource("1_37p78")
 
 [node name="Texto" type="Label" parent="." unique_id=812775576]
+visible = false
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 60.0
 offset_bottom = 43.0
+
+[node name="Margen" type="MarginContainer" parent="." unique_id=256903015]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Arriba" type="HBoxContainer" parent="Margen" unique_id=728565491]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="Izquierda" type="VBoxContainer" parent="Margen/Arriba" unique_id=1787155648]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Vida" type="Label" parent="Margen/Arriba/Izquierda" unique_id=1086655516]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Vida: 100"
+
+[node name="Vidas" type="Label" parent="Margen/Arriba/Izquierda" unique_id=130649406]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Vidas: 2"
+
+[node name="Espacio1" type="Control" parent="Margen/Arriba" unique_id=1612030605]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Centro" type="VBoxContainer" parent="Margen/Arriba" unique_id=955317213]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Tiempo" type="Label" parent="Margen/Arriba/Centro" unique_id=202056354]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Tiempo: 15:00"
+horizontal_alignment = 1
+
+[node name="Enemigo" type="Label" parent="Margen/Arriba/Centro" unique_id=1976399349]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Enemigo: 100"
+horizontal_alignment = 1
+
+[node name="Espacio2" type="Control" parent="Margen/Arriba" unique_id=585119184]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Derecha" type="VBoxContainer" parent="Margen/Arriba" unique_id=76520660]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Llaves" type="Label" parent="Margen/Arriba/Derecha" unique_id=1341509819]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Llaves: 0 / 3"
+
+[node name="Salida" type="Label" parent="Margen/Arriba/Derecha" unique_id=1988668728]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Salida: Cerrada"
+
+[node name="Intentos" type="Label" parent="Margen/Arriba/Derecha" unique_id=1829937215]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Intento: 2"
+
+[node name="CentroMensaje" type="VBoxContainer" parent="Margen" unique_id=987123456]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Titulo" type="Label" parent="Margen/CentroMensaje" unique_id=987123457]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "VICTORIA"
+horizontal_alignment = 1
+
+[node name="Detalle" type="Label" parent="Margen/CentroMensaje" unique_id=987123458]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Escapaste del laberinto"
+horizontal_alignment = 1
+
+[node name="Subdetalle" type="Label" parent="Margen/CentroMensaje" unique_id=987123459]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Reiniciando..."
+horizontal_alignment = 1
+
+[node name="Abajo" type="VBoxContainer" parent="Margen" unique_id=364108626]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="Interaccion" type="Label" parent="Margen/Abajo" unique_id=778671]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Comiendo fruta... 0%"
+horizontal_alignment = 1
