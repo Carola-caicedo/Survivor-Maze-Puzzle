@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://7cir24paxtfm"]
 
+[ext_resource type="Texture2D" uid="uid://bnvvjj76byaaw" path="res://personaje/Textures/texturaPiso.png" id="1_lkn2i"]
 [ext_resource type="PackedScene" uid="uid://dd8fgqa4gx" path="res://muro.tscn" id="1_muro"]
 
 [sub_resource type="BoxShape3D" id="shape_piso"]
@@ -12,6 +13,10 @@ albedo_color = Color(0.55, 0.45, 0.36, 1)
 material = SubResource("mat_piso")
 size = Vector3(49, 0.4, 34)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b14a1"]
+albedo_texture = ExtResource("1_lkn2i")
+uv1_scale = Vector3(10, 10, 10)
+
 [node name="Laberinto" type="Node3D" unique_id=1746071510]
 
 [node name="Piso" type="StaticBody3D" parent="." unique_id=320178104]
@@ -23,6 +28,7 @@ shape = SubResource("shape_piso")
 [node name="Malla" type="MeshInstance3D" parent="Piso" unique_id=1715264731]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0.11605835)
 mesh = SubResource("mesh_piso")
+surface_material_override/0 = SubResource("StandardMaterial3D_b14a1")
 
 [node name="Muros" type="Node3D" parent="." unique_id=1064888397]
 

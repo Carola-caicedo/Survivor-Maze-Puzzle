@@ -15,7 +15,7 @@ enum Estado { PATRULLAR, ESPERAR, PERSEGUIR, AVISO, GOLPE, RECARGA, BUSCAR, HUIR
 @export var tiempo_aviso = 1.0
 @export var tiempo_recarga = 1.0
 @export var alcance_golpe = 1.6
-@export var danio = 15
+@export var danio = 25
 
 @export var vida = 100.0
 @export var vida_huida = 30.0

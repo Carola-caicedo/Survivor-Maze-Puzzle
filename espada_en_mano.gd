@@ -10,7 +10,7 @@ extends Node
 # cambien estos tres valores en el Inspector.
 @export var posicion = Vector3(-0.26, 0.0, 0.05)
 @export var rotacion_grados = Vector3(0.0, 30.0, 0.0)
-@export var escala = 1.0
+@export var escala = 2.0
 
 
 func _ready():
