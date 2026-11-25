@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://wd8flliokisc" path="res://partida.gd" id="13_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://dbam43vuosh2g" path="res://hud.tscn" id="14_w48qg"]
 [ext_resource type="PackedScene" uid="uid://bts8qwxctvwti" path="res://zona_a.tscn" id="15_zona_a"]
+[ext_resource type="PackedScene" uid="uid://cx4m78v2np0k1" path="res://trampa_picas.tscn" id="16_picas"]
 [ext_resource type="PackedScene" uid="uid://bkvbn7fhpvo3x" path="res://fruta_modelo.tscn" id="20_fruta"]
 [ext_resource type="Script" uid="uid://bee5smbuw6vsf" path="res://espada_en_mano.gd" id="21_espmano"]
 
@@ -151,5 +152,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12284, 0, -7.502692)
 
 [node name="Trampa4" parent="Trampas" unique_id=111454383 instance=ExtResource("15_zona_a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.823803, 0, -0.11999655)
+
+[node name="Picas1" parent="Trampas" unique_id=778899111 instance=ExtResource("16_picas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.824843, 0, 8.90663)
+
+[node name="Picas2" parent="Trampas" unique_id=778899112 instance=ExtResource("16_picas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.008551, 0, 6.058708)
+desfase_inicial = 1.0
+
+[node name="Picas3" parent="Trampas" unique_id=778899113 instance=ExtResource("16_picas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3586674, 0, -9.471611)
+desfase_inicial = 0.5
+
+[node name="Picas4" parent="Trampas" unique_id=892301140 instance=ExtResource("16_picas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.270739, 0, -11.468343)
+
+[node name="Picas5" parent="Trampas" unique_id=2042541344 instance=ExtResource("16_picas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.685234, 0, -6.56625)
 
 [editable path="Guardian"]
