@@ -39,6 +39,12 @@ func curar(cantidad):
 		return
 	vida = mini(vida + cantidad, 100)
 	cambio.emit(vida)
+
+func actualizar_checkpoint(nuevo_punto: Vector3):
+	punto = nuevo_punto
+	reapariciones += 1
+	cambio.emit(vida)
+	print("¡Checkpoint guardado en ", nuevo_punto, "! Vidas disponibles: ", reapariciones + 1)
 	
 # Se busca aquí y no en _ready(): la Partida quizá todavía no existía.
 func _al_quedar_sin_vida():

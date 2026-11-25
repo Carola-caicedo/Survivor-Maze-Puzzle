@@ -8,6 +8,7 @@ func usar():
 	if jugador and jugador.has_node("Salud"):
 		var salud = jugador.get_node("Salud")
 		salud.curar(curacion)
+		salud.actualizar_checkpoint(jugador.global_position)
 	if has_node("/root/Sonidos"):
 		Sonidos.play_curar()
 	_crear_texto_flotante()

@@ -18,6 +18,9 @@ func _al_entrar(cuerpo):
 	var faltan = get_tree().get_nodes_in_group("objetivos").size() - 1
 	print(name, " +", valor, " · faltan ", faltan, " · cuadro ", Engine.get_physics_frames())
 	recogido.emit(valor)
+	var salud = cuerpo.get_node_or_null("Salud")
+	if salud != null:
+		salud.actualizar_checkpoint(cuerpo.global_position)
 	if has_node("/root/Sonidos"):
 		Sonidos.play_llave()
 	var partida = get_tree().get_first_node_in_group("partida")
