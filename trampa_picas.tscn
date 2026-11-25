@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://cx4m78v2np0k1"]
+
+[ext_resource type="Script" path="res://trampa_picas.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_BasePlaca"]
+albedo_color = Color(0.2, 0.22, 0.25, 1)
+roughness = 0.85
+
+[sub_resource type="BoxMesh" id="Mesh_BasePlaca"]
+material = SubResource("Mat_BasePlaca")
+size = Vector3(1.6, 0.04, 1.6)
+
+[sub_resource type="StandardMaterial3D" id="Mat_Disco"]
+albedo_color = Color(0.12, 0.13, 0.15, 1)
+metallic = 0.7
+roughness = 0.4
+
+[sub_resource type="CylinderMesh" id="Mesh_Disco"]
+material = SubResource("Mat_Disco")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.02
+
+[sub_resource type="StandardMaterial3D" id="Mat_Hoyo"]
+albedo_color = Color(0.05, 0.05, 0.06, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="Mesh_Hoyo"]
+material = SubResource("Mat_Hoyo")
+top_radius = 0.08
+bottom_radius = 0.08
+height = 0.025
+
+[sub_resource type="StandardMaterial3D" id="Mat_Asta"]
+albedo_color = Color(0.28, 0.28, 0.3, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="Mesh_Asta"]
+material = SubResource("Mat_Asta")
+top_radius = 0.04
+bottom_radius = 0.04
+height = 1.3
+
+[sub_resource type="StandardMaterial3D" id="Mat_Punta"]
+albedo_color = Color(0.9, 0.92, 0.95, 1)
+metallic = 0.95
+roughness = 0.15
+
+[sub_resource type="CylinderMesh" id="Mesh_Punta"]
+material = SubResource("Mat_Punta")
+top_radius = 0.001
+bottom_radius = 0.08
+height = 0.35
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_peligro"]
+size = Vector3(1.5, 1.6, 1.5)
+
+[node name="TrampaPicas" type="Node3D" unique_id=892301140]
+script = ExtResource("1_script")
+
+[node name="BasePlaca" type="MeshInstance3D" parent="." unique_id=892301141]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+mesh = SubResource("Mesh_BasePlaca")
+
+[node name="Discos" type="Node3D" parent="." unique_id=892301142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+
+[node name="Disco1" type="MeshInstance3D" parent="Discos" unique_id=892301143]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -0.4)
+mesh = SubResource("Mesh_Disco")
+
+[node name="Hoyo" type="MeshInstance3D" parent="Discos/Disco1" unique_id=892301144]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+mesh = SubResource("Mesh_Hoyo")
+
+[node name="Disco2" type="MeshInstance3D" parent="Discos" unique_id=892301145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -0.4)
+mesh = SubResource("Mesh_Disco")
+
+[node name="Hoyo" type="MeshInstance3D" parent="Discos/Disco2" unique_id=892301146]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+mesh = SubResource("Mesh_Hoyo")
+
+[node name="Disco3" type="MeshInstance3D" parent="Discos" unique_id=892301147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0.4)
+mesh = SubResource("Mesh_Disco")
+
+[node name="Hoyo" type="MeshInstance3D" parent="Discos/Disco3" unique_id=892301148]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+mesh = SubResource("Mesh_Hoyo")
+
+[node name="Disco4" type="MeshInstance3D" parent="Discos" unique_id=892301149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0.4)
+mesh = SubResource("Mesh_Disco")
+
+[node name="Hoyo" type="MeshInstance3D" parent="Discos/Disco4" unique_id=892301150]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+mesh = SubResource("Mesh_Hoyo")
+
+[node name="Lanzas" type="Node3D" parent="." unique_id=892301151]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7, 0)
+
+[node name="Lanza1" type="Node3D" parent="Lanzas" unique_id=892301152]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -0.4)
+
+[node name="Asta" type="MeshInstance3D" parent="Lanzas/Lanza1" unique_id=892301153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+mesh = SubResource("Mesh_Asta")
+
+[node name="Punta" type="MeshInstance3D" parent="Lanzas/Lanza1" unique_id=892301154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.475, 0)
+mesh = SubResource("Mesh_Punta")
+
+[node name="Lanza2" type="Node3D" parent="Lanzas" unique_id=892301155]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -0.4)
+
+[node name="Asta" type="MeshInstance3D" parent="Lanzas/Lanza2" unique_id=892301156]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+mesh = SubResource("Mesh_Asta")
+
+[node name="Punta" type="MeshInstance3D" parent="Lanzas/Lanza2" unique_id=892301157]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.475, 0)
+mesh = SubResource("Mesh_Punta")
+
+[node name="Lanza3" type="Node3D" parent="Lanzas" unique_id=892301158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0.4)
+
+[node name="Asta" type="MeshInstance3D" parent="Lanzas/Lanza3" unique_id=892301159]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+mesh = SubResource("Mesh_Asta")
+
+[node name="Punta" type="MeshInstance3D" parent="Lanzas/Lanza3" unique_id=892301160]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.475, 0)
+mesh = SubResource("Mesh_Punta")
+
+[node name="Lanza4" type="Node3D" parent="Lanzas" unique_id=892301161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0.4)
+
+[node name="Asta" type="MeshInstance3D" parent="Lanzas/Lanza4" unique_id=892301162]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+mesh = SubResource("Mesh_Asta")
+
+[node name="Punta" type="MeshInstance3D" parent="Lanzas/Lanza4" unique_id=892301163]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.475, 0)
+mesh = SubResource("Mesh_Punta")
+
+[node name="AreaPeligro" type="Area3D" parent="." unique_id=892301164]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaPeligro" unique_id=892301165]
+shape = SubResource("BoxShape3D_peligro")
+
+[node name="AudioPeligro" type="AudioStreamPlayer3D" parent="." unique_id=892301166]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+max_distance = 20.0
