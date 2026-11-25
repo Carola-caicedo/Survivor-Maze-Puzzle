@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ds3hmxgdqt7sx"
+path="res://.godot/imported/Casual_Male.obj-d1750bb06f1e6d31259d8ad8743b0893.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Casual_Male.obj-d1750bb06f1e6d31259d8ad8743b0893.mesh"]
+
+source_file="res://Ultimate Animated Character Pack - Nov 2019/OBJ/Casual_Male.obj"
+dest_files=["res://.godot/imported/Casual_Male.obj-d1750bb06f1e6d31259d8ad8743b0893.mesh", "res://.godot/imported/Casual_Male.obj-d1750bb06f1e6d31259d8ad8743b0893.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

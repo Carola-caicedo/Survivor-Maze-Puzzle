@@ -85,20 +85,41 @@ func elegir_estado():
 
 func animar():
 	if accion != "":
-		anim.play(accion)
+		reproducir_anim(accion)
 		return
 	match estado:
 		Estado.QUIETO:
-			anim.play("idle")
+			reproducir_anim("idle")
 		Estado.CAMINAR:
-			anim.play("walk")
+			reproducir_anim("walk")
 		Estado.CORRER:
-			anim.play("sprint")
+			reproducir_anim("sprint")
 		Estado.AIRE:
-			if anim.has_animation("jump"):
-				anim.play("jump")
-			else:
-				anim.play("fall")
+			reproducir_anim("jump")
+
+
+func reproducir_anim(nombre: String) -> void:
+	if anim == null:
+		return
+	if anim.has_animation(nombre):
+		anim.play(nombre)
+		return
+	var mapeo = {
+		"idle": ["Idle", "idle"],
+		"walk": ["Walk", "walk"],
+		"sprint": ["Run", "sprint", "run"],
+		"correr": ["Run", "sprint", "run"],
+		"jump": ["Jump", "jump", "fall", "Fall"],
+		"fall": ["Jump", "fall", "jump", "Fall"],
+		"attack-melee-right": ["SwordSlash", "Punch", "attack-melee-right"],
+		"espada": ["SwordSlash", "Punch", "attack-melee-right"],
+		"interact-right": ["PickUp", "interact-right", "Idle"]
+	}
+	var candidatos = mapeo.get(nombre.to_lower(), [nombre.capitalize(), nombre.to_lower()])
+	for c in candidatos:
+		if anim.has_animation(c):
+			anim.play(c)
+			return
 
 
 # ---------------------------------------------------------------------------

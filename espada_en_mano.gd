@@ -56,8 +56,14 @@ func _ready():
 
 
 func _hueso_parecido(esqueleto: Skeleton3D) -> String:
+	# 1. Puño o mano derecha (Fist.R, Hand.R, etc.)
 	for i in esqueleto.get_bone_count():
 		var n = esqueleto.get_bone_name(i).to_lower()
-		if n.contains("arm") and n.contains("right"):
+		if n.contains("fist") or (n.contains("hand") and (n.contains("right") or n.ends_with(".r"))):
+			return esqueleto.get_bone_name(i)
+	# 2. Brazo derecho (arm-right, LowerArm.R, etc.)
+	for i in esqueleto.get_bone_count():
+		var n = esqueleto.get_bone_name(i).to_lower()
+		if n.contains("arm") and (n.contains("right") or n.ends_with(".r")):
 			return esqueleto.get_bone_name(i)
 	return ""

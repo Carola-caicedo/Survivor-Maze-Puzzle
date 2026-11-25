@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b5fk2eukw5pdc"]
 
 [ext_resource type="Script" uid="uid://dlck4jyldo3n5" path="res://guardian.gd" id="1_3jwwi"]
-[ext_resource type="PackedScene" uid="uid://btbidf61ylt57" path="res://personaje/character-male-d.glb" id="2_2oh7y"]
+[ext_resource type="PackedScene" uid="uid://dlw4b1j5573my" path="res://personaje/VikingHelmet.glb" id="2_viking"]
 [ext_resource type="Script" path="res://espada_en_mano.gd" id="3_espmano"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1lkc5"]
@@ -15,8 +15,8 @@ script = ExtResource("1_3jwwi")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("CapsuleShape3D_1lkc5")
 
-[node name="Modelo" parent="." unique_id=1225502439 instance=ExtResource("2_2oh7y")]
-transform = Transform3D(-2.6, 0, -2.2729921e-07, 0, 2.6, 0, 2.2729921e-07, 0, -2.6, 0, 0, 0)
+[node name="Modelo" parent="." unique_id=1225502439 instance=ExtResource("2_viking")]
+transform = Transform3D(-0.53, 0, 0, 0, 0.53, 0, 0, 0, -0.53, 0, 0, 0)
 
 [node name="Vision" type="RayCast3D" parent="." unique_id=1849204812]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

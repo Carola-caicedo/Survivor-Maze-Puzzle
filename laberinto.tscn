@@ -20,7 +20,6 @@ uv1_scale = Vector3(10, 10, 10)
 [node name="Laberinto" type="Node3D" unique_id=1746071510]
 
 [node name="Piso" type="StaticBody3D" parent="." unique_id=320178104]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 
 [node name="Colision" type="CollisionShape3D" parent="Piso" unique_id=2036377994]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)

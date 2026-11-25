@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dr5ql1cv3y8v8"
+path="res://.godot/imported/VikingHelmet.obj-2ffab7d019d1cb0f14fb1bafa61a3d6b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/VikingHelmet.obj-2ffab7d019d1cb0f14fb1bafa61a3d6b.mesh"]
+
+source_file="res://Ultimate Animated Character Pack - Nov 2019/OBJ/VikingHelmet.obj"
+dest_files=["res://.godot/imported/VikingHelmet.obj-2ffab7d019d1cb0f14fb1bafa61a3d6b.mesh", "res://.godot/imported/VikingHelmet.obj-2ffab7d019d1cb0f14fb1bafa61a3d6b.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

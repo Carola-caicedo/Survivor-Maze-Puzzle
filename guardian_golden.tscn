@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c6xk82p4m8gty"]
+
+[ext_resource type="Script" uid="uid://dlck4jyldo3n5" path="res://guardian.gd" id="1_3jwwi"]
+[ext_resource type="PackedScene" uid="uid://q7nu05owljpx" path="res://personaje/Knight_Golden_Male.glb" id="2_knight"]
+[ext_resource type="Script" uid="uid://bee5smbuw6vsf" path="res://espada_en_mano.gd" id="3_espmano"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1lkc5"]
+radius = 0.35
+height = 1.75
+
+[node name="Guardian2" type="CharacterBody3D" unique_id=1453112332 groups=["enemigos"]]
+script = ExtResource("1_3jwwi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1336567868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("CapsuleShape3D_1lkc5")
+
+[node name="Modelo" parent="." unique_id=1225502439 instance=ExtResource("2_knight")]
+transform = Transform3D(-0.53, 0, 0, 0, 0.53, 0, 0, 0, -0.53, 0, 0, 0)
+
+[node name="Vision" type="RayCast3D" parent="." unique_id=1849204812]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+
+[node name="EspadaVisual" type="Node" parent="." unique_id=1456634912]
+script = ExtResource("3_espmano")
+color_hoja = Color(0.85, 0.7, 0.2, 1)
+escala = 6.0

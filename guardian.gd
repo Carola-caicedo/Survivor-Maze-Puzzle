@@ -239,8 +239,22 @@ func frenar(animacion: String = "idle"):
 
 
 func reproducir_anim(nombre: String):
-	if anim != null and anim.has_animation(nombre):
+	if anim == null:
+		return
+	if anim.has_animation(nombre):
 		anim.play(nombre)
+		return
+	var mapeo = {
+		"idle": ["Idle", "idle"],
+		"walk": ["Walk", "walk"],
+		"attack-melee-right": ["SwordSlash", "Punch", "attack-melee-right"],
+		"interact-right": ["PickUp", "Punch", "Idle", "idle"]
+	}
+	var candidatos = mapeo.get(nombre.to_lower(), [nombre.capitalize(), nombre.to_lower()])
+	for c in candidatos:
+		if anim.has_animation(c):
+			anim.play(c)
+			return
 
 
 func distancia_a(p: Vector3) -> float:

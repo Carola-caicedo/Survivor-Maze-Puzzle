@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://biyljgujvggl4" path="res://zona_b.tscn" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://cct4m0pdjhcq7" path="res://personaje.gd" id="1_pj"]
-[ext_resource type="PackedScene" uid="uid://bkmexfnojlmxi" path="res://personaje/character-male-a.glb" id="2_modelo"]
+[ext_resource type="PackedScene" uid="uid://bsngf2tlxer2h" path="res://personaje/Casual_Male.glb" id="2_modelo"]
 [ext_resource type="Script" uid="uid://c4ncpqjuna8wv" path="res://camara_sigue.gd" id="3_efxa6"]
 [ext_resource type="Script" uid="uid://8muj4gig7kts" path="res://espada.gd" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://g76pliv8lo3r" path="res://interactuar.gd" id="5_lquwl"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bts8qwxctvwti" path="res://zona_a.tscn" id="15_zona_a"]
 [ext_resource type="PackedScene" uid="uid://bkvbn7fhpvo3x" path="res://fruta_modelo.tscn" id="20_fruta"]
 [ext_resource type="Script" uid="uid://bee5smbuw6vsf" path="res://espada_en_mano.gd" id="21_espmano"]
+[ext_resource type="PackedScene" uid="uid://c6xk82p4m8gty" path="res://guardian_golden.tscn" id="22_golden"]
 
 [sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
 
@@ -48,7 +49,6 @@ shadow_enabled = true
 sky_mode = 1
 
 [node name="Puertas" type="Node3D" parent="." unique_id=200584845]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="zona_b4" parent="Puertas" unique_id=1929311012 node_paths=PackedStringArray("enemigo") instance=ExtResource("1_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.26123, 0, -4.554341)
@@ -84,6 +84,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.265438, 0, -7.432411)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.7023945)
 script = ExtResource("1_pj")
 camara = NodePath("../Camera3D")
+speed_correr = 5.0
 accion_prueba = "guardian.F5"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Personaje" unique_id=1745509103]
@@ -91,13 +92,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("Capsula")
 
 [node name="Modelo" parent="Personaje" unique_id=1969657668 instance=ExtResource("2_modelo")]
-transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
+transform = Transform3D(-0.53, 0, 0, 0, 0.53, 0, 0, 0, -0.53, 0, 0, 0)
 
 [node name="Espada" type="Node" parent="Personaje" unique_id=204470823]
 script = ExtResource("4_1bvp3")
 
 [node name="EspadaVisual" type="Node" parent="Personaje" unique_id=1633377387]
 script = ExtResource("21_espmano")
+escala = 6.0
 
 [node name="Interactuar" type="Node" parent="Personaje" unique_id=1103396318]
 script = ExtResource("5_lquwl")
@@ -114,16 +116,16 @@ rango_ataque = 1.3
 tiempo_recarga = 1.2
 danio = 30
 
-[node name="Modelo" parent="Guardian" index="1" unique_id=1225502439]
-transform = Transform3D(-2.6, 0, -2.2729921e-07, 0, 2.6, 0, 2.2729921e-07, 0, -2.6, 0, 0, 1.4907494)
+[node name="EspadaVisual" parent="Guardian" index="3"]
+escala = 6.0
 
 [node name="Salida" parent="." unique_id=503925074 instance=ExtResource("10_4c57u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.5, -16.531)
 
 [node name="Laberinto" parent="." unique_id=1746071510 instance=ExtResource("12_dg77c")]
-transform = Transform3D(-0.9999998, -0.00034557463, -0.0005397836, -0.0003455928, 0.99999994, 3.8668677e-05, 0.000539772, 3.8830523e-05, -0.9999999, 0.001, 1.5, -1.56)
+transform = Transform3D(-0.9999998, -0.00034557463, -0.0005397836, -0.0003455928, 0.99999994, 3.8668677e-05, 0.000539772, 3.8830523e-05, -0.9999999, 0.001, 0, -1.56)
 
-[node name="Guardian2" parent="." unique_id=1453112332 instance=ExtResource("7_272bh")]
+[node name="Guardian2" parent="." unique_id=1453112332 instance=ExtResource("22_golden")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.629967, 0, -9.200039)
 rapidez = 2.5
 ruta = Array[Vector3]([Vector3(0, 0, 0), Vector3(0, 0, 2.5), Vector3(0, 0, -2.5)])
