@@ -154,18 +154,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12284, 0, -7.502692)
 [node name="Trampa4" parent="Trampas" unique_id=111454383 instance=ExtResource("15_zona_a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52673626, 0, -0.115246296)
 
-[node name="Llaves" type="Node3D" parent="." unique_id=1238116634]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
-[node name="Objetivo" parent="Llaves" unique_id=1374076160 instance=ExtResource("9_kek77")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.332409, 0, 5.741292)
-
-[node name="Objetivo2" parent="Llaves" unique_id=1146712578 instance=ExtResource("9_kek77")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.096336, 0, -11.4666)
-
-[node name="Objetivo3" parent="Llaves" unique_id=1158250416 instance=ExtResource("9_kek77")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.939623, 0, -6.0806565)
-
 [node name="Picas1" parent="Trampas" unique_id=778899111 instance=ExtResource("16_picas")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.824843, 0, 8.90663)
 
@@ -182,5 +170,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.270739, 0, -11.468343)
 
 [node name="Picas5" parent="Trampas" unique_id=2042541344 instance=ExtResource("16_picas")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.685234, 0, -6.56625)
+
+[node name="Llaves" type="Node3D" parent="." unique_id=1238116634]
+
+[node name="Objetivo" parent="Llaves" unique_id=1374076160 instance=ExtResource("9_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.332409, 0, 5.741292)
+
+[node name="Objetivo2" parent="Llaves" unique_id=1146712578 instance=ExtResource("9_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.096336, 0, -11.4666)
+
+[node name="Objetivo3" parent="Llaves" unique_id=1158250416 instance=ExtResource("9_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.939623, 0, -6.0806565)
 
 [editable path="Guardian"]
